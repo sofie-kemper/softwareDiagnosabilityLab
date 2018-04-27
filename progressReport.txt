@@ -1,0 +1,12 @@
+PROGRESS:
+
+week 1:
+-Thomas: Trying to set up Defects4j on Windows (difficult, does not work yet)
+-Thomas: Reading some papers on fault localisation/previous research
+-Sofie: Setting up Defects4j
+-Sofie: Trying to set up gzoltar (somehow doesn't work on Mac, NullpointerException)
+-Sofie: Finding some books on Software Design/Code Metrics
+
+week 2:
+-Sofie: implementing script for computing suspiciousness scores (all available metrics)
+-Sofie: automating the suspiciousness score generation [IN PROGRESSS]
