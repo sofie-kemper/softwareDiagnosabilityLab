@@ -9,4 +9,6 @@ week 1:
 
 week 2:
 -Sofie: implementing script for computing suspiciousness scores (all available metrics)
--Sofie: automating the suspiciousness score generation [IN PROGRESSS]
+-Sofie: automating the suspiciousness score generation + ranking
+-Sofie: adapting the bitbucket scripts so that they run on OSX -> we can now generate method-level coverage data
+-Sofie: generating method-level coverage data for Lang-project [IN PROGRESS]
