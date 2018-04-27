@@ -5,6 +5,11 @@
 # Session Data files
 .RData
 
+# data folder
+/coverageData/*
+
+.DS_Store
+
 # Example code in package build process
 *-Ex.R
 
@@ -31,3 +36,4 @@ vignettes/*.pdf
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
+.Rproj.user
