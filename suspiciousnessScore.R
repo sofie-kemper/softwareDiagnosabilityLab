@@ -9,7 +9,8 @@ PROJECT <- "Lang"
 ARTIFACT.LEVEL <- "method"
 
 project.data <- data.table(project = c("Chart", "Closure", "Lang", "Math", "Mockito", "Time"),
-                           nr.bugs = c(26, 133, 1, 106, 38, 27))
+                           nr.bugs = c(26, 133, 65, 106, 38, 27))
+#project.data[3,2] <- 33
 
 for(VERSION in 1:project.data[project == PROJECT, nr.bugs]){
 
