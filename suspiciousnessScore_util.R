@@ -33,16 +33,22 @@ compute.suspiciousness.scores <- function(matrix, spectra){
   return(scores)
 }
 
-calculate_suspiciousness = function(scores, type = c("Jaccard", "Tarantula", "Ochiai",
-                                                     "DStar_1", "DStar_2", "DStar_3", "DStar_4", "DStar_5")){
+calculate_suspiciousness = function(scores,
+                                    type = c("Jaccard", "Tarantula", "Ochiai",
+                                             "DStar_1", "DStar_2", "DStar_3", "DStar_4", "DStar_5"),
+                                    threshold = NA){
   type <- match.arg(type, choices = c("Jaccard", "Tarantula", "Ochiai",
                                       "DStar_1", "DStar_2", "DStar_3", "DStar_4", "DStar_5"))
 
   result <- scores[, .(artifact, get(type))]
-  colnames(result) <- c("artifact", "suspiciousness")
-  result <- result[order(-suspiciousness),]
-  result[, suspiciousness.rank := frank(result, -suspiciousness, ties.method = "min")]
+  colnames(result) <- c("artifact", "suspiciousness.score")
+  result <- result[order(-suspiciousness.score),]
+  result[, suspiciousness.rank := frank(result, -suspiciousness.score, ties.method = "min")]
   ## TODO ties.method dense or min?!
+
+  if(!is.na(threshold)){
+    result[, suspiciousness := suspiciousness.rank <= threshold]
+  }
 
   return(result)
 }

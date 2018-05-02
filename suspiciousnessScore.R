@@ -25,6 +25,6 @@ for(VERSION in 1:project.data[project == PROJECT, nr.bugs]){
 
   write.csv(scores, file.path(DATA.PATH, "suspiciousness.csv"), row.names = F)
 
-  jaccard <- calculate_suspiciousness(scores, type = "Jaccard")
+  jaccard <- calculate_suspiciousness(scores, type = "Jaccard", threshold = 2)
 
 }
