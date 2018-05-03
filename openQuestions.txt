@@ -1,0 +1,8 @@
+### Open Questions/To Discuss
+
+- threshold for classifying artifacts into suspicious/non-suspicious, possibilities:
+  - no threshold, use regression
+  - hard threshold, e.g., rank 10
+  - compute threshold based on one project version
+  - compute threshold based on project
+  - compute 1 threshold for all our data
