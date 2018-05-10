@@ -143,6 +143,49 @@ methods.
 
 \subsubsection{Coupling and Cohesion Metrics}
 
+\subsubsection{FindBugs-Findings}
+
+All following findings are provided by FindBugs which is integrated in TeamScale
+(see \ref{sec:teamscale}).
+
+\paragraph{Performance Code Smell Findings (FB-P)}
+
+This metric counts the number of found code smells regarding performance.
+Examples include the boing and subsequent unboxing of a value or the invocation
+of \texttt{.toString()} on a String.
+
+\paragraph{Malicious Code Vulnerability Findings (FB-MCV)}
+
+\emph{Malicious code vulnerabilities} quantifies the number of of code smells in
+this category, e.g., a \texttt{finalize} method that is \texttt{public} instead
+of \texttt{protected}.
+
+\paragraph{Security Findings (FB-SEC)}
+
+This metric measure the number of finding in the code smell category security,
+e.g., a JSP-reflected cross-site scripting vulnerability.
+
+\paragraph{Dodgy Code Findings (FB-DC)}
+
+This metric quantifies the occurrence of \enquote{dodgy code}, e.g.,
+unchecked/unconfirmed casts.
+
+\paragraph{Correctness Findings (FB-COR)}
+
+\emph{Correctness findings} counts the number of code smell findings in the
+category of correctness, e.g., impossible downcasts.
+
+\paragraph{Multithreaded Correctness Findings (FB-MCOR)}
+
+This metric measures the number of findings regarding multithreaded correctness,
+e.g., attribute with a \texttt{get}-method that is not \texttt{synchronized}
+while the corresponding \texttt{set}-method is \texttt{synchronized}.
+
+\paragraph{Bad Practice Findings (FB-BP)}
+
+This metric counts the number of bad practice findings, e.g., using a rough
+value of a known constant.
+
 \subsubsection{TeamScale-Findings}
 
 \paragraph{Number of TeamScale-Findings (CF)}
@@ -152,6 +195,8 @@ TeamScale (see \ref{sec:teamscale}), i.e., including TeamScale's own as well as
 FindBug's code findings. All the findings listed below as well as the findings
 regarding structure (F-HML, F-MML, F-HFS, F-MFS, F-HND, F-MND) are contained in
 this number.
+
+\paragraph{}
 
 \subsection{Dynamic Metrics}
 
