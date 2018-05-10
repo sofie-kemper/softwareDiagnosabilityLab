@@ -1,0 +1,56 @@
+*****************************************************************	Static Code Metrics	******************************************************************
+ID--------------- Metric---------------------------------Desc
+LOC		Lines of Code
+SLOC		Source LOC
+CC-H		Cyclomatic Complexity high		# of methods with CC >20
+CC-M		CC medium				# of methods with CC >10
+CC-L		CC low					# of methods with CC <=10
+CF		Findings				aggregated # of all findings (listed below)
+
+----------------- Findings Regarding Structure ---------------------- 
+F-ML-H		Method Length high			# of methods that are >75 SLOC
+F-ML-M		Method Length medium			# of methods that are >30 SLOC
+F-FS-H		File size high				# of files with >750 SLOC
+F-FS-M		File size medium			# of files with >300 SLOC
+F-ND-H		Nesting Depth high			# of files methods with a nesting depth >5
+F-ND-M		Nesting Depth medium			# of files methods with a nesting depth >3
+
+----------------- Findbugs Code Smells -------------------------
+FB-P		Performance Code Smells			# of smells regarding performance, e.g. boxing and directly unboxing a value or invoking .toString() method on a String property
+FB-MCV		Malicous Code Vulnerability		# of smells in this category, e.g. Finalizer should be protected, not public
+FB-SEC		Security				# of smells in this category, e.g. JSP reflected cross site scripting vulnerability
+FB-DC		Dodgy Code				# of smells in this category, e.g. Unchecked/unconfirmed cast
+FB-COR		Correctness				# of smells in this category, e.g. Impossible downcast
+FB-MCOR		Multithreaded Correctness		# of smells in this category, e.g. 'Unsynchronized get method, synchronized set method'
+FB-BP		Bad Practice				# of smells in this category, e.g. Rough value of known constant found
+
+--------------- Findings Regarding Code Anomalies -------------
+F-CA-MBB	Missing Braces for Block Statements	# of findings
+F-CA-RT		Null Return optional Type		# of findings of 'Method returns null but return type is Optional'
+F-CA-MC		Missing Code				# of findings, for 'empty blocks', 'commented-out code' and files that contain no code at all
+F-CA-TC		Test Conventions			# of findings in this category, e.g. naming of Test classes, usage of @ignore or inverted conditions
+F-CA-NP		Null Pointer dereference		# of finding, can lead to exceptions being thrown at runtime because of wrong null assignment or missing check for null before dereferencing
+F-CA-UVP	Unused Variable or Parameter		# of findings
+F-CA-EH		Exception Handling			# of findings, the category includes catching or throwing of generic Exceptions and loss of the stacktrace
+F-CA-CL		Contains on list			# of calls of contains() on a list, this downgrades performance. Instead of a list, a set should be used.
+F-CA-BP		Findings Bad Practices			# of findings in this category, e.g. star import or methods with the same name than methods in Obect (can lead to confusion). This are additional Bad Practice Smells to the ones already detected by Findbugs
+
+----------------- Others -----------------------
+F-O-UC		Unused Code				# of Unused private Fields or Methods
+F-O-CF		Code Formatting				# of findings regarding "multiple statements in same line" and "multiple declarations in same line"
+F-O-CL		Cloning					# of clones
+F-O-CLC		Clone Coverage				percentage value that describes the chance that a random SLOC is cloned at another position
+
+
+
+
+
+Tools---------------------------used for ... (Metrics)
+Teamscale:			LOC, SLOC, CC-H, CC-M, CC-L and all metrics prefixed with 'F-'
+FindBugs:			all Metrics prefixed with 'FB-'
+Teamscale REST Client		own implementation in python to automatically query metric values from Teamscale and transform them into an appropriate format
+
+
+Additional Comments
+"F-" prefix as ID for a Metric means it's a 'Finding' (wording is used by the tool Teamscale, a Finding can be seen as a Code Smell).
+"FB-" prefix means it's a Code Smell (Group) detected by FindBugs
