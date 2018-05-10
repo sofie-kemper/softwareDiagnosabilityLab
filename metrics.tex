@@ -1,0 +1,93 @@
+\documentclass{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+
+\begin{document}
+
+\title{Design and Software Quality Metrics}
+\subtitle{Exploring the Relationship between Design Metrics and Software
+Diagnosability using Machine Learning (2018)}
+\author{Thomas Dornberger \and Sofie Kemper}
+\date{2018-05-10}
+
+\maketitle
+
+\section{Metrics}
+
+\subsection{Static Metrics}
+
+\subsubsection{Lines of Code including Comments (LOCC)}
+
+\subsubsection{Lines of Code without Comments (LOC)}
+
+The \emph{number of lines of code without comments} measures the size of actual
+source code of a component, i.e., it quantifies the size of the source code
+excluding blank lines and comments. We measure it using Lizard (see
+\ref{sec:lizard}) as well as TeamScale (see \ref{sec:teamscale}).
+
+\subsubsection{Cyclomatic Complexity Number (CCN)}
+
+The \emph{cyclomatic complexity} or \emph{McCabe's complexity} of a component
+describes its perceived complexity. It is proportionate to the number of
+linearly independent paths through a program, i.e., if-statements
+or while-loops increase this value. A high cyclomatic complexity number
+indicates that code is hard to read, understand, and maintain which might lead
+to more bugs. We measure the cyclomatic complexity on a
+method-level using Lizard (see \ref{sec:lizard}) and aggregate the values as
+described above. 
+
+\subsubsection{Token Count of Functions(TCF)}
+
+The \emph{token count of a function} describes the number of conditional
+statement tokens in a function. It is used to calculate the cyclomatic
+complexity number. We use the tool Lizard (see \ref{sec:lizard}) to measure this
+function-level property and aggregate the obtained values as described above.
+
+\subsubsection{Parameter Count of Functions (PCF)}
+
+The \emph{parameter count of a function} quanitifies the number of parameters a
+given function takes. We measure this function-level property using Lizard (see
+\ref{sec:lizard}) and aggregate the obtained values as described above.
+
+\subsection{Dynamic Metrics}
+
+\subsection{Test Suite Characteristics}
+
+\subsection{Bug Characteristics}
+
+\section{Tools}
+
+We have tried a multitude of different tools (SourceMeter, LOCC, SonarQube,
+CCCC, USC CodeCount, CLOC, etc.) and chosen the following for the interesting
+metrics they provide as well as the possibility to automate their usage, i.e.,
+the possibility to execute them on the command line and output formats that can
+be easily parsed and used for our purposes.
+
+\subsubsection{Lizard}
+\label{sec:lizard}
+
+Lizard is a Python-based tool that analyses code size and perceived code
+complexity as well as parameter and token counts at the function level. It can
+analyse Java, C/C++, JavaScript, Python, Ruby, Swift, PHP, Scala, and Objective
+C scripts.  More information can be found at
+\url{https://pypi.org/project/lizard/}.
+
+\subsubsection{TeamScale}
+\label{sec:teamscale}
+
+\subsubsection{JPeek}
+
+JPeek is a static collector of Java code metrics relating to cohesion and
+coupling. It measures 5 metrics on the method level and aggregates this data
+quantitatively, e.g., calculating min, max, variance, and other statistical
+measures,  as well as qualitatively, i.e., \enquote{scoring} components as a
+whole and categorising them into the three classes \enquote{green},
+\enquote{yellow}, and \enquote{red}. In addition, it defines and measures
+\enquote{defects} which are classes whose scores particularly bad using the mean
+scores as baseline.  For more information, the interested reader is referred to
+\url{http://www.jpeek.org} and \url{https://github.com/yegor256/jpeek}.
+
+\end{document}
