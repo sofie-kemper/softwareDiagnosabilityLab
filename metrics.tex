@@ -188,6 +188,9 @@ value of a known constant.
 
 \subsubsection{TeamScale-Findings}
 
+All following metrics are obtained via the tool TeamScale (see
+\ref{sec:teamscale})
+
 \paragraph{Number of TeamScale-Findings (CF)}
 
 This metric provides the total, aggregated number of findings by the tool
@@ -196,7 +199,76 @@ FindBug's code findings. All the findings listed below as well as the findings
 regarding structure (F-HML, F-MML, F-HFS, F-MFS, F-HND, F-MND) are contained in
 this number.
 
-\paragraph{}
+\paragraph{Missing Braces for Block Statements Findings (F-MBB)}
+
+This metric quantifies the occurrence of the code anomaly that block statements
+miss braces.
+
+\paragraph{Null Return Optional Findings (F-RT)}
+
+This metric counts how often a method returns \texttt{null} although the return
+type is \texttt{Optional}.
+
+\paragraph{Missing Code Findings (F-MC)}
+
+\emph{Missing code findings} quantifies how often empty blocks, code that is
+\enquote{commented out} or files which don't contain any code occur.
+
+\paragraph{Test Convention Findings (F-TC)}
+
+This metric counts how often test conventions are violated. This includes the
+naming of test classes as well as the usage of \texttt{@ignore} and inverted
+conditions.
+
+\paragraph{Null Pointer Dereference Findings (F-NP)}
+
+This metric quantifies the occurrence of possible \texttt{null} pointer
+dereferences at runtime due to wrong \texttt{null} assignments or missing checks
+before dereferencing.
+
+\paragraph{Unused Variable/Parameter Findings (F-UVP)}
+
+This metric counts the number of unused variables or parameters.
+
+\paragraph{Exception Handling Findings (F-EH)}
+
+\emph{Exception Handling Findings} represents the number of code smell findings
+regarding exception handling, e.g., catching or throwing generic exceptions or
+the loss of the stacktrace.
+
+\paragraph{\texttt{Contains} on List Findings (F-CL)}
+
+This metric quantifies how often \texttt{contains()} is called on a list, which
+is a performance issue.
+
+\paragraph{Bad Practice Findings (F-BP)}
+
+The category of bad practice code smells includes star imports or methods with
+the same name as methods in \texttt{Object}. They supplement the bad practice
+findings provided by FindBugs. This metric quantifies the occurrence of such
+findings.
+
+\paragraph{Unused Code Findings (F-UC)}
+
+This metric quantifies the occurrence of unused \texttt{private} fields or
+methods.
+
+\paragraph{Code Formatting Findings (F-CF)}
+
+This metric counts how often problems regarding the code formatting are found.
+This includes the problems of multiple statements or declarations in the same
+line.
+
+\paragraph{Cloning Findings (F-CL)}
+
+The \emph{cloning findings} metric counts the number of clones, i.e., duplicated
+code. A high number of clones can cause problems regarding the code maintenance
+and, thus, introduce bugs.
+
+\paragraph{Clone Coverage (F-CLC)}
+
+The \emph{clone coverage} describes how likely it is that a random SLOC is
+cloned at another position as percentage.
 
 \subsection{Dynamic Metrics}
 
@@ -223,6 +295,20 @@ C scripts.  More information can be found at
 
 \subsubsection{TeamScale}
 \label{sec:teamscale}
+
+TeamScale is a tool that provides a multitude of static code analyses to
+indicate code quality and possible quality defects (\enquote{findings}). It is
+free for academic usage. The tool monitors the quality of code over time by
+using manualyy checked-in versions or automatically detected versions of a given
+repository. By using the diffs between versions, it can quickly analyse the
+history of a project.
+
+The metrics are calculated on the file or even method level and aggregated
+hierarchically. Hence, we can obtain project metrics easily.
+
+We have implemented a REST-client to automatically query the metric values from
+TeamScale and to transform them into a format we can easily use for our
+analysis.
 
 \subsubsection{JPeek}
 
