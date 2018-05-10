@@ -20,6 +20,9 @@ Diagnosability using Machine Learning (2018)}
 
 \subsection{Static Metrics}
 
+The following metrics are \emph{static} metrics, i.e., they are calculated based
+on the source code.
+
 \subsubsection{Size and Complexity Information}
 
 In cases where size and complexity metrics can only be measured at the method or
@@ -142,6 +145,50 @@ relative occurrence of highlyy (respectively moderately or lowly) complex
 methods.
 
 \subsubsection{Coupling and Cohesion Metrics}
+
+The following metrics try to capture coupling and cohesion of the source code.
+They are all provided by the tool JPeek (see \ref{sec:jpeek}). we use the
+aggregated metrics provided by this tool where applicable: minimum value,
+maximum value, number of classes scored as \enquote{Green}, \enquote{Yellow},
+and \enquote{Red}, respectively. In addition, the total score and the percentage
+of defects are used for each of the 5 metrics.
+
+\paragraph{Cohesion Among Method of Class (CAMC)}
+
+This metric measures the cohesion among the methods of a given class. Formally,
+it indicates the extent of intersections of individual method parameter type
+lists with the list of parameter types in all methods in the class.
+
+\paragraph{Lack of Cohesion of Methods (LCOM5)}
+
+This metric was proposed by Henderson and Sellers and can be interpreted as the
+number of pairs of methods in a given class having no common attribute. Hence,
+it is based on method similarity among methods of a class. It provides a measure
+of class cohesion expressed as percentage value ($\in [0,1]$). A value of 0
+indicates full cohesion while a value of 1 indicates no cohesion.
+
+\paragraph{Method-Method through Attributes Cohesion (MMAC)}
+
+This metric is an indicator of method-method cohesion. The similarity between
+a pair of methods is expressed as a function of their shared properties. The
+metric defines the average cohesion of all pairs of methods.
+
+\paragraph{Normalised Hamming Distance (NHD)}
+
+This metric measures class-level cohesion uses the similarity of parameter types
+of the class's methods as basis for measuring cohesion. It compares pairs of
+methods, counting a disagreement only if a parameter type is used by one of the
+methods and not used by the other method. It was developed as an alternative to
+CAMC in order to prevent false positives and have a measure with a finer
+granularity. 
+
+\paragraph{Sensitive Class Cohesion Metric (SCOM)}
+
+This metric measures cohesion via the proportion of class attributes used in the
+class's methods. It yields values in the range $[0,1]$ where 0 indicates total
+lack of cohesion, i.e., every method deals with an independent set of
+attributes, and 1 indicates full cohesion, i.e., all class attributes are used
+by every single method.
 
 \subsubsection{FindBugs-Findings}
 
@@ -272,9 +319,17 @@ cloned at another position as percentage.
 
 \subsection{Dynamic Metrics}
 
+The following metrics are \emph{dynamic} design metrics, i.e., they are
+calculated based on a program's call or data dependency graph.
+
 \subsection{Test Suite Characteristics}
 
+The following metrics aim to quantitatiely analyse a project's test suite.
+
 \subsection{Bug Characteristics}
+
+The following metrics are related to a known bug and aim to quantify features of
+the bug such as its location and size.
 
 \section{Tools}
 
@@ -301,16 +356,20 @@ indicate code quality and possible quality defects (\enquote{findings}). It is
 free for academic usage. The tool monitors the quality of code over time by
 using manualyy checked-in versions or automatically detected versions of a given
 repository. By using the diffs between versions, it can quickly analyse the
-history of a project.
-
-The metrics are calculated on the file or even method level and aggregated
+history of a project. The tool FindBugs (see
+\url{http://findbugs.sourceforge.net}) is also contained in TeamScale. The
+metrics are calculated on the file or even method level and aggregated
 hierarchically. Hence, we can obtain project metrics easily.
+
+More information regarding TeamScale can be found at
+\url{https://www.cqse.eu/en/products/teamscale/landing/}.
 
 We have implemented a REST-client to automatically query the metric values from
 TeamScale and to transform them into a format we can easily use for our
 analysis.
 
 \subsubsection{JPeek}
+\label{sec:jpeek}
 
 JPeek is a static collector of Java code metrics relating to cohesion and
 coupling. It measures 5 metrics on the method level and aggregates this data
@@ -319,7 +378,10 @@ measures,  as well as qualitatively, i.e., \enquote{scoring} components as a
 whole and categorising them into the three classes \enquote{green},
 \enquote{yellow}, and \enquote{red}. In addition, it defines and measures
 \enquote{defects} which are classes whose scores particularly bad using the mean
-scores as baseline.  For more information, the interested reader is referred to
-\url{http://www.jpeek.org} and \url{https://github.com/yegor256/jpeek}.
+scores as baseline.  
+
+We use the version JPeek 0.26.3. For more information on the tool, the
+interested reader is referred to \url{http://www.jpeek.org} and
+\url{https://github.com/yegor256/jpeek}.
 
 \end{document}
