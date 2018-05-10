@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
+\usepackage{csquotes}
 \usepackage{hyperref}
 
 \begin{document}
@@ -19,16 +20,89 @@ Diagnosability using Machine Learning (2018)}
 
 \subsection{Static Metrics}
 
-\subsubsection{Lines of Code including Comments (LOCC)}
+\subsubsection{Size and Complexity Information}
 
-\subsubsection{Lines of Code without Comments (LOC)}
+In cases where size and complexity metrics can only be measured at the method or
+file level, we aggregate the calculated values such that we obtain the maximum,
+average and median values for the whole project.
 
-The \emph{number of lines of code without comments} measures the size of actual
+\paragraph{Lines of Code including Comments (LOC)}
+
+The \emph{number of lines of code} qantifies a component's size by counting the
+number of lines of code excluding blank lines. Comments are included in this
+measure. We use TeamScale (see \ref{sec:teamscale}) to measure the number of
+lines of code.
+
+\paragraph{Lines of Code without Comments (SLOC)}
+
+The \emph{number of lines of code without comments} or \emph{source lines of
+code} measures the size of actual
 source code of a component, i.e., it quantifies the size of the source code
 excluding blank lines and comments. We measure it using Lizard (see
 \ref{sec:lizard}) as well as TeamScale (see \ref{sec:teamscale}).
 
-\subsubsection{Cyclomatic Complexity Number (CCN)}
+\paragraph{High Length Methods (F-HML)}
+
+This metric quantifies the occurrence of high-length methods, i.e., methods with
+more than 75 SLOC. It is provided by TeamScale (see \ref{sec:teamscale}).
+
+In addition, we measure the proportion of high-length methods (F-PHML).
+
+\paragraph{Medium Length Methods (F-MML)}
+
+This metric counts the number of methods of medium length. These are methods
+that have between 30 and 75 SLOC. We use TeamScale (see \ref{sec:teamscale}) to
+measure it.
+
+In addition, we use the proportion of methods of medium length (F-PMML).
+
+\paragraph{Files of High Size (F-HFS)}
+
+This metric quantifies the occurrenc of very long files, i.e., files containing
+more than 750 SLOC. It is extracted using TeamScale (see \ref{sec:teamscale}).
+
+In addition, we calculate the proportion of files of high size (F-PHFS).
+
+\paragraph{Files of Medium Size (F-MFS)}
+
+Using TeamScale (see \ref{sec:teamscale}), we obtain this number of medium to
+long files, i.e., files containing between 300 and 750 SLOC.
+
+In addition, we measure the proportion of files of medium size (F-PMFS).
+
+\paragraph{Methods with High Nesting Depth (F-HND)}
+
+The nesting depth is an indicator for the complexity of a method. It measures
+the number of statement blocks nested due to the use of control structures. This
+metric quantifies the occurrence of methods with a very high nesting depth,
+i.e., a nesting depth higher than 5. It is provided by TeamScale (see
+\ref{sec:teamscale}).
+
+In addition, we use the proportion of methods with high nesting depth (F-PHND).
+
+\paragraph{Methods with Medium Nesting Depth (F-MND)}
+
+This metric indicates the number of methods with medium nesting depth, i.e.,
+methods with a corresponding nesting depth between 3 and 5. It is provided by
+TeamScale (see \ref{sec:teamscale}).
+
+In addition to this absolute number, we calculate the proportion of methods with
+medium nesting depth (F-PMND).
+
+\paragraph{Token Count of Functions(TCF)}
+
+The \emph{token count of a function} describes the number of conditional
+statement tokens in a function. It is used to calculate the cyclomatic
+complexity number. We use the tool Lizard (see \ref{sec:lizard}) to measure this
+function-level property and aggregate the obtained values as described above.
+
+\paragraph{Parameter Count of Functions (PCF)}
+
+The \emph{parameter count of a function} quanitifies the number of parameters a
+given function takes. We measure this function-level property using Lizard (see
+\ref{sec:lizard}) and aggregate the obtained values as described above.
+
+\paragraph{Cyclomatic Complexity Number (CCN)}
 
 The \emph{cyclomatic complexity} or \emph{McCabe's complexity} of a component
 describes its perceived complexity. It is proportionate to the number of
@@ -37,20 +111,47 @@ or while-loops increase this value. A high cyclomatic complexity number
 indicates that code is hard to read, understand, and maintain which might lead
 to more bugs. We measure the cyclomatic complexity on a
 method-level using Lizard (see \ref{sec:lizard}) and aggregate the values as
-described above. 
+described above. In addition, we also use the cyclomatic complexity numbers
+(aggregated project-level data) provided by TeamScale (see \ref{sec:teamscale}).
 
-\subsubsection{Token Count of Functions(TCF)}
+\paragraph{Number of High Cyclomatic Complexity Methods (HCC)}
 
-The \emph{token count of a function} describes the number of conditional
-statement tokens in a function. It is used to calculate the cyclomatic
-complexity number. We use the tool Lizard (see \ref{sec:lizard}) to measure this
-function-level property and aggregate the obtained values as described above.
+This metric counts the number of methods which are scored as highly complex,
+i.e., those with a cyclomatic complexity number greater than 20. We calculate it
+using TeamScale (see \ref{sec:teamscale}).
 
-\subsubsection{Parameter Count of Functions (PCF)}
+\paragraph{Number of Medium Cyclomatic Complexity Methods (MCC)}
 
-The \emph{parameter count of a function} quanitifies the number of parameters a
-given function takes. We measure this function-level property using Lizard (see
-\ref{sec:lizard}) and aggregate the obtained values as described above.
+This metric represents the number of methods of medium complexity, i.e., those
+with a cyclomatic complexity number between 10 and 20 ($CC \in (10, 20]$). It is
+provided by TeamScale (see \ref{sec:teamscale}).
+
+\paragraph{Number of Low Cyclomatic Complexity Methods (LCC)}
+
+This metric is used to measure the number of methods of low complexity. Low
+complexity methods are those that show a cyclomatic complexity number smaller
+than 10. TeamScale (see \ref{sec:teamscale}) is used to obtain this metric.
+
+\paragraph{Proportion of High/Medium/Low Complexity Methods (PHCC/PMCC/PLCC)}
+
+We define the proportions of high (respectively medium or low) complexity
+methods by using the absolute number of high (respectively medium or low)
+complexity methods (see above)  provided by TeamScale (see \ref{sec:teamscale})
+and normalising it by the total number of methods measured, thus, obtaining a
+relative occurrence of highlyy (respectively moderately or lowly) complex
+methods.
+
+\subsubsection{Coupling and Cohesion Metrics}
+
+\subsubsection{TeamScale-Findings}
+
+\paragraph{Number of TeamScale-Findings (CF)}
+
+This metric provides the total, aggregated number of findings by the tool
+TeamScale (see \ref{sec:teamscale}), i.e., including TeamScale's own as well as
+FindBug's code findings. All the findings listed below as well as the findings
+regarding structure (F-HML, F-MML, F-HFS, F-MFS, F-HND, F-MND) are contained in
+this number.
 
 \subsection{Dynamic Metrics}
 
