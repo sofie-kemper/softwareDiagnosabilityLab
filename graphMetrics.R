@@ -3,6 +3,7 @@ requireNamespace("sna")
 library("igraph")
 
 PROJECT <- "Lang"
+
 DATA.PATH <- file.path("coverageData/graphs", PROJECT)
 
 project.data <- data.table(project = c("Chart", "Closure", "Lang", "Math", "Mockito", "Time"),
@@ -13,7 +14,7 @@ nr.versions <- project.data[project == PROJECT, nr.bugs]
 if(!is.na(nr.versions)){
 
   ## create table for storing results
-  results <- data.table(id = paste0(PROJECT, "_", (1:nr.versions)))
+  results <- data.table(id = 1:nr.versions)
 
   ## add all columns (initialised with NA-values) to table
   dynamic.features <- c("VC", "EC", "SEC", "MEP", "MAXVD", "MVD", "VD50Q", "VD75Q", "VD80Q", "VD90Q",
@@ -22,8 +23,7 @@ if(!is.na(nr.versions)){
   dynamic.features <- c(paste0("CG_", dynamic.features), paste0("DD_", dynamic.features))
   results[, (dynamic.features) := NA_real_]
 
-  #for(i in 1:project.data[project == "Lang",nr.bugs]){
-  for (i in 1:1){
+  for(i in 1:project.data[project == "Lang",nr.bugs]){
 
     ## read graph (.dot format)
     adjacency <- sna::read.dot(paste0(DATA.PATH, "/", i , ".dot"))
@@ -88,4 +88,8 @@ if(!is.na(nr.versions)){
       results[i, paste(type, "CC", sep = "_")] <- transitivity(graph, type = "global")
     }
   }
+
+  results <- round(results, digits = 2)
+  results[, id:= paste0(PROJECT, "_", id)]
+  write.csv(results, file = paste(DATA.PATH, "dynamic_metrics.csv", sep = "/"))
 }
