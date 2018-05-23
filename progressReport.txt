@@ -13,6 +13,14 @@ week 2:
 -Sofie: automating the suspiciousness score generation + ranking + qualitative analysis (threshold)
 -Sofie: adapting the bitbucket scripts so that they run on OSX -> we can now generate method-level coverage data
 -Sofie: generating method-level coverage data for Lang-project
--Sofie: read research on relation (organisational structure)&(error proneness of binaries), analysis/ideas how this is applicable to our OSS projects
+-Sofie/Thomas: read research on relation (organisational structure/code metrics)&(error proneness), analysis/ideas how this is applicable to our OSS projects
 -Thomas: download & skim result data for Time bug 3 (statement level)
 -Thomas: understand R-script to compute suspiciousness score provided by Sofie
+
+week 3:
+-Sofie: read papers on graph metrics
+-Sofie: investigate at options and output format of JDCallgraph
+-Sofie: select dynamic metrics to investigate and appropriate R packages
+
+week 4:
+-Sofie: implement dynamic metrics as script
