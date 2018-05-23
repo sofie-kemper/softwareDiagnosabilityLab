@@ -16,7 +16,7 @@ compute.suspiciousness.scores <- function(matrix, spectra){
 
   ## compute suspiciousness scores
   scores[, Jaccard := N_cf /(N_cf + N_uf + N_cs)]
-  scores[, Tarantula := (N_cf/N_f) / ((N_cf/N_f) + (N_cs+N_s))]
+  scores[, Tarantula := (N_cf/N_f) / ((N_cf/N_f) + (N_cs/N_s))]
   scores[, Ochiai := N_cf /(sqrt(N_f * (N_cf + N_cs)))]
   scores[, DStar_1 := N_cf/(N_uf + N_cs)]
   scores[, DStar_2 := (N_cf^2)/(N_uf + N_cs)]
