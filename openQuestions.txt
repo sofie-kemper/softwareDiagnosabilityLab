@@ -1,8 +1,12 @@
 ### Open Questions/To Discuss
 
 - threshold for classifying artifacts into suspicious/non-suspicious, possibilities:
-  - no threshold, use regression
+  - no threshold, use regression on suspiciousness-score
+  - no threshold, use regression on suspiciousness-rank
   - hard threshold, e.g., rank 10
   - compute threshold based on one project version
   - compute threshold based on project
   - compute 1 threshold for all our data
+- using multi-edge dynamic graphs?
+  - problem: we only have simplified graphs (provided by Mojdeh)
+  - either generate them all (impractical) or leave out simplified metrics!
