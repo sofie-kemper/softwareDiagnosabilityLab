@@ -20,7 +20,7 @@ if(!is.na(nr.versions)){
                         "MAXVI", "MVI", "MAXVO", "MVO", "MSND", "GD", "GR", "MD", "MEC",
                         "EC50Q", "EC75Q", "EC80Q", "EC90Q", "VCON", "ECON", "CC")
   dynamic.features <- c(paste0("CG_", dynamic.features), paste0("DD_", dynamic.features))
-  results[, (dynamic.features) := NA]
+  results[, (dynamic.features) := NA_real_]
 
 #for(i in 1:project.data[project == "Lang",nr.bugs]){
 for (i in 1:1){
@@ -31,7 +31,38 @@ for (i in 1:1){
   cg.graph <- dd.graph
   ## TODO: distinguish data dependency and callgraph edges
 
-  ## calculate metrics
+  ## calculate metrics for call graph and data dependency graph data
+  for(type in c("CG", "DD")){
+
+    ## retrieve suitable graph
+    if(type == "CG"){
+      graph = cg.graph
+    }else{
+      graph = dd.graph
+    }
+
+    results[i, paste(type, "VC", sep = "_")] <- vcount(graph)
+    results[i, paste(type, "EC", sep = "_")] <- ecount(graph)
+
+    degrees <- degree(graph)
+    results[i, paste(type, "MAXVD", sep = "_")] <- max(degrees)
+    results[i, paste(type, "MVD", sep = "_")] <- mean(degrees)
+    results[i, paste(type, "VD50Q", sep = "_")] <- quantile(degrees, 0.50)
+    results[i, paste(type, "VD75Q", sep = "_")] <- quantile(degrees, 0.75)
+    results[i, paste(type, "VD80Q", sep = "_")] <- quantile(degrees, 0.80)
+    results[i, paste(type, "VD90Q", sep = "_")] <- quantile(degrees, 0.90)
+
+    in.degrees <- degree(graph, mode = "in")
+    results[i, paste(type, "MAXVI", sep = "_")] <- max(in.degrees)
+    results[i, paste(type, "MVI", sep = "_")] <- mean(in.degrees)
+
+    out.degrees <- degree(graph, mode = "out")
+    results[i, paste(type, "MAXVO", sep = "_")] <- max(out.degrees)
+    results[i, paste(type, "MVO", sep = "_")] <- mean(out.degrees)
+
+    start.nodes <- V(graph)[degree(graph, mode = "in") == 0]
+    results[i, paste(type, "MSND", sep = "_")] <- max(degree(graph, v = start.nodes, mode = "out"))
+  }
 
 
 }
