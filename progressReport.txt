@@ -3,7 +3,7 @@ PROGRESS:
 week 1:
 -Thomas: Trying to set up Defects4j on Windows (including setting up Perl and ant for windows) - Problems: git apply error during checkout, build errors for some of the projects during compile
 -Thomas: Setting up gzoltar - NullPointerException during analysis
--Thomas: Reading some papers on fault localisation/previous research
+-Thomas: Reading some papers on fault localization/previous research
 -Sofie: Setting up Defects4j
 -Sofie: Trying to set up gzoltar (somehow doesn't work on Mac, NullpointerException)
 -Sofie: Finding some books on Software Design/Code Metrics
@@ -21,6 +21,15 @@ week 3:
 -Sofie: read papers on graph metrics
 -Sofie: investigate at options and output format of JDCallgraph
 -Sofie: select dynamic metrics to investigate and appropriate R packages
+-Thomas: research about static metrics and tools to detect code smells
+-Thomas: finally set up defects4j in Ubuntu VM
+-Thomas: configure Teamscale and prepare Analysis profile, select appropriate code smells
 
 week 4:
 -Sofie: implement dynamic metrics as script
+-Thomas: research on graph metrics, read paper about relation of graph metrics to factors like bugs severity, maintainability
+-Thomas: implement python REST client to query static metrics from teamscale and transform them into an appropriate format
+
+week 5:
+-Thomas: refine python REST client - add calculation of density and propotion metrics
+-Thomas: research on test suite metrics (especially DDU), gather ideas on bug metrics
