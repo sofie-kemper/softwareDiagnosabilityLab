@@ -1,0 +1,9 @@
+Test Metrics                    Get From
+    #test cases                 gzoltar?
+    #passed                     gzoltar? or #failing = #relevant - #passed
+    #failed                     http://program-repair.org/defects4j-dissection/#!/
+    #relevant test cases        in defects4j folder: defects4j\framework\projects\Lang\relevant_tests
+    percentage of passed
+    
+    
+    Test Coverage - woher bekommen? Wie relevant (lohnt sich wohl kaum die für das gesamte Projekt zu berechnen)
