@@ -5,14 +5,14 @@ use basic metrics provided via Gzoltar (see \ref{sec:gzoltar}) as well as test
 suite metrics proposed by Perez et al in \enquote{A Test-suite Diagnosability
 Metric for Spectrum-based Fault Localization Approaches} and shown to be good
 indicators of spectrum-based fault localisation accuracy. These metrics are
-computed based on the coverage data provided by Gzoltar (see \ref{sec:gzoltar}).
+computed based on the coverage data provided by Gzoltar (see \ref{sec:gzoltar}). 
 
-\subsubsection{Number of Passed Test Cases (T-NP)}
+On top of that, we use the number of test cases and test size normalised via the number of source lines of code as a coarse approximation of test coverage which would be infeasible to calculate with our limited computation power. Other metrics such as the number of relevant components (i.e., all components tested by at least one of the relevant tests) were rejected since equivalent information is already contained in the dynamic metrics.
+
+\subsubsection{Number of Relevant Passed Test Cases (T-NP)}
 
 The total number of test cases out of the test suite that were passed, i.e.,
-executed successfully. We measure this based on all test classes, not solely
-the ones that fail for the current buggy version. This metric is calculated via
-Gzoltar (see \ref{sec:gzoltar}).
+executed successfully. We measure this based only on the relevant test classes, i.e., all test classes which load any of the changed components. This metric is calculated via Gzoltar (see \ref{sec:gzoltar}).
 
 \subsubsection{Proportion of Passed Test Cases (T-PP)}
 
@@ -20,7 +20,7 @@ The proportion of passed test cases out of all relevant test cases.
 
 \subsubsection{Number of Failed Test Cases (T-NF)}
 
-The total number of test cases out of the test suite that were failed, i.e.,
+The total number of test cases out of the relevant test suite that were failed, i.e.,
 that could not be executed successfully. This number can be extracted by Gzoltar
 (see \ref{sec:gzoltar}) or accessed via
 \url{http://program-repair.org/defects4j-dissection/#!/}.
