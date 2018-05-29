@@ -25,3 +25,9 @@ DDU = p' * G * U                                                                
 Erst mal nicht beachten:
     #test cases                 ich denke die gesamte Anzahl ist nicht sonderlich relevant
     Test Coverage - woher bekommen? Wie relevant (lohnt sich wohl kaum die für das gesamte Projekt zu berechnen)
+
+
+LOC src vs LOC test
+#test/LOC
+#relevant/#all tests
+#cols in matrix

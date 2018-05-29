@@ -2,7 +2,7 @@ library("data.table")
 requireNamespace("sna")
 library("igraph")
 
-PROJECT <- "Lang"
+PROJECT <- "Closure"
 
 DATA.PATH <- file.path("coverageData/graphs", PROJECT)
 
@@ -26,10 +26,11 @@ if(!is.na(nr.versions)){
   for(i in 1:project.data[project == "Lang",nr.bugs]){
 
     ## read graph (.dot format)
-    adjacency <- sna::read.dot(paste0(DATA.PATH, "/", i , ".dot"))
-    dd.graph <- graph_from_adjacency_matrix(adjacency, mode = "directed")
-    cg.graph <- dd.graph
-    ## TODO: distinguish data dependency and callgraph edges
+    dd.adjacency <- sna::read.dot(paste0(DATA.PATH, "/dataDependency/", i , ".dot"))
+    cg.adjacency <- sna::read.dot(paste0(DATA.PATH, "/callGraph/", i , ".dot"))
+    dd.graph <- graph_from_adjacency_matrix(dd.adjacency, mode = "directed")# dotted edges
+    cg.graph <- graph_from_adjacency_matrix(cg.adjacency, mode = "directed")# normal edges
+    ## TODO: distinguish data dependency and callgraph edges (bold edges = "in the same basic block") -> the same execution profile!
 
     ## calculate metrics for call graph and data dependency graph data
     for(type in c("CG", "DD")){
