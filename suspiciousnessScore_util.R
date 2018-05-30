@@ -29,7 +29,7 @@ compute.suspiciousness.scores <- function(matrix, spectra){
 
   ## delete preliminary metrics as they are now unneeded
   scores[, c("N_cf", "N_cs", "N_uf", "N_us", "N_f", "N_s") := list(NULL, NULL, NULL, NULL, NULL, NULL)]
-
+  for (j in 1:ncol(scores)) set(scores, which(is.infinite(scores[[j]]) | is.nan(scores[[j]])), j, NA)
   return(scores)
 }
 
@@ -53,14 +53,20 @@ calculate_suspiciousness = function(scores,
 }
 
 annotate_real_faults <- function(scores, real.faults){
-  scores[, faulty:=F]
+  if(all(is.na(real.faults))){
+    scores[, faulty:=NA]
+    return(scores)
+  }
 
+  scores[, faulty:=F]
   for(real.fault in real.faults){
-    fault.split <- as.numeric(gregexpr("#", real.fault, fixed=T)[[1]])
-    fault.name <- substr(real.fault, 1, fault.split-1)
-    fault.line <- substr(real.fault, fault.split, nchar(real.fault))
-    scores[, faulty := faulty |
-             (grepl(fault.name, artifact, fixed=T) & grepl(fault.line, artifact, fixed=T))]
+    if(!is.na(real.fault)){
+      fault.split <- as.numeric(gregexpr("#", real.fault, fixed=T)[[1]]) # if -1 -> no match!
+      fault.name <- substr(real.fault, 1, fault.split-1)
+      fault.line <- substr(real.fault, fault.split, nchar(real.fault))
+      scores[, faulty := faulty |
+               (grepl(fault.name, artifact, fixed=T) & grepl(fault.line, artifact, fixed=T))]
+    }
   }
   return(scores)
 }
