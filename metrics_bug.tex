@@ -9,7 +9,9 @@ we define buggy-file versions (prefix BF-) which measure the corresponding
 statistic only on the files that are responsible for the bug, i.e., those files
 that are modified in the bug's corresponding patch. The aggregation of these
 metrics for multiple files is achieved in the same way as the project-level
-aggregation.
+aggregation, i.e., some findings are summed up whereas others are normalised by
+the respective source lines of code or the maximum values are used (e.g.,
+maximum cyclomatic complexity number).
 
 On top of that, the dynamic metrics we defined on the project level are also
 extended to the bug level (prefix B-) by looking at bug-specific properties of
@@ -17,6 +19,10 @@ the call- and data-dependency graphs, e.g., the in-degree of the vertices which
 correspond to the faulty methods. In cases where there are multiple faulty
 methods, the \enquote{most extreme} value is used, e.g., the maximum in-degree
 or the minimum eccentricity.
+
+Other ideas such as analysing whether the bug is part of a design antipattern or
+calculating object-oriented metrics on the bug method were rejected due to their
+high effort and low presumed meaningfulness for the software diafnosability.
 
 \subsubsection{Number of Files (B-NF)}
 
