@@ -44,11 +44,23 @@ calculate_suspiciousness = function(scores,
   colnames(result) <- c("artifact", "suspiciousness.score")
   result <- result[order(-suspiciousness.score),]
   result[, suspiciousness.rank := frank(result, -suspiciousness.score, ties.method = "min")]
-  ## TODO ties.method dense or min?!
 
   if(!is.na(threshold)){
     result[, suspiciousness := suspiciousness.rank <= threshold]
   }
 
   return(result)
+}
+
+annotate_real_faults <- function(scores, real.faults){
+  scores[, faulty:=F]
+
+  for(real.fault in real.faults){
+    fault.split <- as.numeric(gregexpr("#", real.fault, fixed=T)[[1]])
+    fault.name <- substr(real.fault, 1, fault.split-1)
+    fault.line <- substr(real.fault, fault.split, nchar(real.fault))
+    scores[, faulty := faulty |
+             (grepl(fault.name, artifact, fixed=T) & grepl(fault.line, artifact, fixed=T))]
+  }
+  return(scores)
 }

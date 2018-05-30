@@ -24,12 +24,9 @@ for(VERSION in 1:project.data[project == PROJECT, nr.bugs]){
   ## matrix: rows = tests, cols = code artifacts + 1 row for pass/fail
 
   scores <- compute.suspiciousness.scores(matrix, spectra)
+  test <- annotate_real_faults(scores, real.faults[id == paste(PROJECT, VERSION, sep="_"), faulty.method])
 
   write.csv(scores, file.path(DATA.PATH, "suspiciousness.csv"), row.names = F)
 
   jaccard <- calculate_suspiciousness(scores, type = "Jaccard", threshold = 2)
-
-  score <- score_accuracy(jaccard,
-                          real.fault = real.faults[id == paste(PROJECT, VERSION, sep="_"), faulty.method])
-
 }
