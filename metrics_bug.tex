@@ -1,4 +1,62 @@
 \subsection{Bug Characteristics}
 
 The following metrics are related to a known bug and aim to quantify features of
-the bug such as its location and size.
+the bug such as its location and size. The following  statistics are taken from
+the Defects4J Dissection (see \ref{sec:defects4jDissection}).
+
+In addition, for all static metrics analysed via TeamScale on the project level,
+we define buggy-file versions (prefix BF-) which measure the corresponding
+statistic only on the files that are responsible for the bug, i.e., those files
+that are modified in the bug's corresponding patch. The aggregation of these
+metrics for multiple files is achieved in the same way as the project-level
+aggregation.
+
+On top of that, the dynamic metrics we defined on the project level are also
+extended to the bug level (prefix B-) by looking at bug-specific properties of
+the call- and data-dependency graphs, e.g., the in-degree of the vertices which
+correspond to the faulty methods. In cases where there are multiple faulty
+methods, the \enquote{most extreme} value is used, e.g., the maximum in-degree
+or the minimum eccentricity.
+
+\subsubsection{Number of Files (B-NF)}
+
+This metric quantifies the number of files modified in the patch that fixes the
+bug.
+
+\subsubsection{Number of Classes (B-NC)}
+
+The number of classes changed in the patch is given by this metric.
+
+\subsubsection{Number of Methods (B-NM)}
+
+This metric indicates the number of methods modified in the patch.
+
+\subsubsection{Number of Lines (B-NL)}
+
+The metric counts the total number of lines modified in the patch.
+
+\subsubsection{Number of Lines Added/Removed/Modified (B-NAL/B-NRL/B-NML)}
+
+These metrics indicate the number of lines (of code) that were added, removed,
+or modified, respectively, in the patch. The sum of these three metrics
+corresponds to the number of lines (B-NL).
+
+\subsubsection{Number of Chunks (B-NCH)}
+
+This metric indicates the number of \enquote{chunks} modified in the patch. A
+chunk is defined as a section in the code containing sequential line changes.
+
+\subsubsection{Number of Repair Patterns (B-NRP)}
+
+This metric quantifies the number of different \enquote{repair patterns}
+employed in the patch for the corresponding bug. A repair pattern is a general
+pattern of fixing a bug, i.e., a characteristic of the bug patch. Examples
+include  \enquote{Single Line}, indicating that only a single line was changed,
+or \enquote{Wrong Variable Reference}.
+
+\subsubsection{Number of Repair Actions (B-NRA)}
+
+The number of repair actions counts the number of different actions employed in
+the process of fixing the bug, i.e., visible in the patch diff. Examples of
+repair actions include \enquote{Variable replacement by another variable} or
+\enquote{Conditional (if) branch addition}.
