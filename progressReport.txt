@@ -33,3 +33,7 @@ week 4:
 week 5:
 -Thomas: refine python REST client - add calculation of density and propotion metrics
 -Thomas: research on test suite metrics (especially DDU), gather ideas on bug metrics
+
+week 6:
+-Thomas: research about ML techniques
+-Thomas: Extract Teamscale metrics on buggy files as bug metrics
