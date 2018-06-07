@@ -33,7 +33,14 @@ week 4:
 week 5:
 -Thomas: refine python REST client - add calculation of density and propotion metrics
 -Thomas: research on test suite metrics (especially DDU), gather ideas on bug metrics
+-?? Sofie: implemetation of DDU
 
 week 6:
 -Thomas: research about ML techniques
 -Thomas: Extract Teamscale metrics on buggy files as bug metrics
+-?? Sofie: extract bug metrics from defects4j dissection
+-?? Sofie: calculate dynamic metrics on buggy nodes
+-?? Sofie: matching of faulty methods from defects4j to gzoltar
+
+week 7:
+-Thomas: setup of jdcallgraph and dot file generation

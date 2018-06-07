@@ -10,12 +10,9 @@ Bug Metrics
 get all these metrics by
     http://program-repair.org/defects4j-dissection/#!/
     
-
-get all Teamscale Metrics (see static Metrics, especially the ones prefixed with 'F-') for the file containing the bug
-    for multiple Changed files: Sum up all findings
-	assumption: File == Class
+    static Teamscal Metrics on buggy Files, DONE
     
-more Ideas    
+more Ideas
     OO-Metriken auf Bug-Klasse berechnen, z.B. inheritance depth, class coupling, class methods, sub classes
     Metriken auf Bug Methode berechnen - wie gut möglich?
     Wie gut lassen sich call graph Metriken auf die buggy-Methode (oder Klasse) berechnen?
