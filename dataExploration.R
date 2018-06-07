@@ -4,6 +4,8 @@ library("corrplot")
 library("Hmisc")
 
 PATH.TO.DATA <- "coverageData/graphs/Lang/dynamic_metrics.csv"#"coverageData/data.csv"
+OUTPUT.PATH <- "results/dataExploration"
+
 data.ids <- fread(PATH.TO.DATA)
 data <- data[, -1]
 data <- data[,-1]
@@ -18,12 +20,12 @@ corr <- round(cor(data), 3)
 corr[is.na(corr)] <- 0
 
 ## create plot of correlations
-pdf("results/correlations.pdf", height = 15, width = 15)
+pdf(file.path(OUTPUT.PATH, "correlations.pdf"), height = 15, width = 15)
 corrplot(corr, type = "upper", order = "hclust", method = "color", diag = T)
 dev.off()
 
 ## create plot of correlations including only those statistically significant (p-val < 0.05)
-pdf("results/correlations_pval.pdf", height = 15, width = 15)
+pdf(file.path(OUTPUT.PATH, "correlations_pval.pdf"), height = 15, width = 15)
 corrplot(r.corr, type = "upper", order = "hclust", method = "color", diag = T,
          p.mat = p.corr, insig = "blank")
 dev.off()
@@ -41,7 +43,7 @@ data.without.na <- data[,eval(not.na.idx), with = F]
 pca <- prcomp(na.omit(data.without.na), scale. = T, center = T)
 
 ## print variance explained by the components
-pdf("results/pca_variance.pdf")
+pdf(file.path(OUTPUT.PATH, "pca_variance.pdf"))
 plot(pca, type = "l")
 dev.off()
 
