@@ -11,7 +11,7 @@ ARTIFACT.LEVEL <- "method"
 project.data <- data.table(project = c("Chart", "Closure", "Lang", "Math", "Mockito", "Time"),
                            nr.bugs = c(26, 133, 65, 106, 38, 27))
 
-real.faults <- fread("coverageData/realFaults/faults.csv", header = T)
+real.faults <- fread("coverageData/realFaults/faults_handwritten.csv", header = T)
 
 all.scores <- lapply(1:project.data[project == PROJECT, nr.bugs], function(VERSION){
 
@@ -36,14 +36,22 @@ res <- lapply(1:length(all.scores), function(VERSION){
   p.id <- paste(PROJECT, VERSION, sep="_")
 
   if(!all(is.na(score$faulty))){# otw we don't have information about which method is faulty!
-    return(list(id = p.id,
+    return(list(id = p.id,# TODO percentage to examine?
                 nr.to.examine.dstar.2 = get_nr_to_examine(score, "DStar_2"),
                 rank.dstar.2 = get_rank(score, "DStar_2"),
                 nr.to.examine.dstar.3 = get_nr_to_examine(score, "DStar_3"),
                 rank.dstar.3 = get_rank(score, "DStar_3"),
                 nr.to.examine.dstar.4 = get_nr_to_examine(score, "DStar_4"),
-                rank.dstar.4 = get_rank(score, "DStar_4")))
+                rank.dstar.4 = get_rank(score, "DStar_4"),
+                nr.to.examine.jaccard = get_nr_to_examine(score, "Jaccard"),
+                rank.jaccard = get_rank(score, "Jaccard"),
+                nr.to.examine.tarantula = get_nr_to_examine(score, "Tarantula"),
+                rank.tarantula = get_rank(score, "Tarantula"),
+                nr.to.examine.ochiai = get_nr_to_examine(score, "Ochiai"),
+                rank.ochiai = get_rank(score, "Ochiai")))
   }
 })
 
 diagnosability.scores <- rbindlist(res, use.names=T, fill=F)
+
+write.csv(diagnosability.scores, paste0("coverageData/", PROJECT, "_diagnosability.csv"), row.names = FALSE)
