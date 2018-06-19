@@ -70,3 +70,30 @@ annotate_real_faults <- function(scores, real.faults){
   }
   return(scores)
 }
+
+get_rank <- function(scores, type = c("Jaccard", "Tarantula", "Ochiai",
+                                      "DStar_1", "DStar_2", "DStar_3", "DStar_4", "DStar_5")){
+  type <- match.arg(type, choices = c("Jaccard", "Tarantula", "Ochiai",
+                                      "DStar_1", "DStar_2", "DStar_3", "DStar_4", "DStar_5"))
+  result <- scores[, .(artifact, get(type), faulty)]
+  colnames(result) <- c("artifact", "suspiciousness.score", "faulty")
+  result <- result[order(-suspiciousness.score),]
+  result[, suspiciousness.rank := frank(result, -suspiciousness.score, ties.method = "min")]
+  return(min(result[faulty == T, suspiciousness.rank])) # TODO first or last or avg rank of faulty methods?
+}
+
+get_nr_to_examine <- function(scores, type = c("Jaccard", "Tarantula", "Ochiai",
+                                               "DStar_1", "DStar_2", "DStar_3", "DStar_4", "DStar_5")){
+  type <- match.arg(type, choices = c("Jaccard", "Tarantula", "Ochiai",
+                                      "DStar_1", "DStar_2", "DStar_3", "DStar_4", "DStar_5"))
+  result <- scores[, .(artifact, get(type), faulty)]
+  colnames(result) <- c("artifact", "suspiciousness.score", "faulty")
+  result <- result[order(-suspiciousness.score),]
+  result[, suspiciousness.rank := frank(result, -suspiciousness.score, ties.method = "min")]
+
+  min.rank.faulty <- min(result[faulty == T, suspiciousness.rank]) # TODO first/last/avg?
+  return(sum(result$suspiciousness.rank < min.rank.faulty)
+         + ceil(sum(result$suspiciousness.rank == min.rank.faulty)/2))
+  }
+
+
