@@ -13,9 +13,10 @@ project.data <- data.table(project = c("Chart", "Closure", "Lang", "Math", "Mock
 
 real.faults <- fread("coverageData/realFaults/faults.csv", header = T)
 
-for(VERSION in 1:project.data[project == PROJECT, nr.bugs]){
+all.scores <- lapply(1:project.data[project == PROJECT, nr.bugs], function(VERSION){
 
   DATA.PATH <- file.path("coverageData", ARTIFACT.LEVEL, PROJECT, VERSION)
+  p.id <- paste(PROJECT, VERSION, sep="_")
 
   spectra <- fread(file.path(DATA.PATH, "spectra"), header = F, sep = "\t")
   matrix <- fread(file.path(DATA.PATH, "matrix"), header = F, sep = " ")
@@ -24,9 +25,25 @@ for(VERSION in 1:project.data[project == PROJECT, nr.bugs]){
   ## matrix: rows = tests, cols = code artifacts + 1 row for pass/fail
 
   scores <- compute.suspiciousness.scores(matrix, spectra)
-  test <- annotate_real_faults(scores, real.faults[id == paste(PROJECT, VERSION, sep="_"), faulty.method])
+  scores <- annotate_real_faults(scores, real.faults[id == p.id, faulty.method])
 
   write.csv(scores, file.path(DATA.PATH, "suspiciousness.csv"), row.names = F)
+  return(scores)
+})
 
-  jaccard <- calculate_suspiciousness(scores, type = "Jaccard", threshold = 2)
-}
+res <- lapply(1:length(all.scores), function(VERSION){
+  score <- all.scores[[VERSION]]
+  p.id <- paste(PROJECT, VERSION, sep="_")
+
+  if(!all(is.na(score$faulty))){# otw we don't have information about which method is faulty!
+    return(list(id = p.id,
+                nr.to.examine.dstar.2 = get_nr_to_examine(score, "DStar_2"),
+                rank.dstar.2 = get_rank(score, "DStar_2"),
+                nr.to.examine.dstar.3 = get_nr_to_examine(score, "DStar_3"),
+                rank.dstar.3 = get_rank(score, "DStar_3"),
+                nr.to.examine.dstar.4 = get_nr_to_examine(score, "DStar_4"),
+                rank.dstar.4 = get_rank(score, "DStar_4")))
+  }
+})
+
+diagnosability.scores <- rbindlist(res, use.names=T, fill=F)
