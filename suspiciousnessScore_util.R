@@ -1,4 +1,11 @@
 library("data.table")
+library("plyr")
+
+PASS.FAIL <- c("0" = "-", "1" = "+")
+
+match.pass.fail <- function(digit){
+  return(as.character(PASS.FAIL[digit+1]))
+}
 
 compute.suspiciousness.scores <- function(matrix, spectra){
 
@@ -93,7 +100,36 @@ get_nr_to_examine <- function(scores, type = c("Jaccard", "Tarantula", "Ochiai",
 
   min.rank.faulty <- min(result[faulty == T, suspiciousness.rank]) # TODO first/last/avg?
   return(sum(result$suspiciousness.rank < min.rank.faulty)
-         + ceil(sum(result$suspiciousness.rank == min.rank.faulty)/2))
+         + ceiling(sum(result$suspiciousness.rank == min.rank.faulty)/2))
   }
 
+get_test_statistics <- function(id, matrix){
+  T_RN = nrow(matrix)
+  T_NP = matrix[pass.fail == "+", .N]
+  T_PP = T_NP/T_RN
+  T_NF = matrix[pass.fail == "-", .N]
+  T_PF = T_NF/T_RN
+  ### TODO T_N
+  ### TODO T_RP
+  test_data <- matrix[, !"pass.fail", with=F]
+  colnames(test_data) <- paste0("C", 1:ncol(test_data))
+  T_D = 1 - abs(1 - 2*sum(test_data)/(nrow(test_data)*(ncol(test_data)-1)))
+  #duplicates = ddply(test_data, .variables = colnames(test_data), .fun = nrow)
 
+  numdup <- aggregate(rep(1, nrow(test_data)), test_data, sum)$x
+  #numdup <- duplicates$V1
+  T_G = 1 - sum(sapply(numdup, function(n){return(n*(n-1))}))/(T_RN*(T_RN-1))
+  T_U = length(unique(as.data.table(t(as.matrix.data.frame(matrix[, !"pass.fail", with=F])))))/(ncol(matrix)-1)
+  T_DDU = T_D * T_G * T_U
+
+  return(list("id" = id,
+              "T_RN" = T_RN,
+              "T_NP" = T_NP,
+              "T_PP" = T_PP,
+              "T_NF" = T_NF,
+              "T_PF" = T_PF,
+              "T_D" = T_D,
+              "T_G" = T_G,
+              "T_U" = T_U,
+              "T_DDY" = T_DDU))
+}
