@@ -2,12 +2,15 @@ library("data.table")
 requireNamespace("sna")
 library("igraph")
 
-PROJECT <- "Closure"
+PROJECT <- "Time"
+THOMAS.DATA <- FALSE
 
 DATA.PATH <- file.path("coverageData/graphs", PROJECT)
 
 project.data <- data.table(project = c("Chart", "Closure", "Lang", "Math", "Mockito", "Time"),
                            nr.bugs = c(NA, 133, 65, 106, NA, 27))
+
+real.faults <- fread("coverageData/realFaults/faults_handwritten.csv", header = T)
 
 ## check whether dynamic data exists for the chosen project
 nr.versions <- project.data[project == PROJECT, nr.bugs]
@@ -17,13 +20,38 @@ if(!is.na(nr.versions)){
   results <- data.table(id = 1:nr.versions)
 
   ## add all columns (initialised with NA-values) to table
-  dynamic.features <- c("VC", "EC", "SEC", "MEP", "MAXVD", "MVD", "VD50Q", "VD75Q", "VD80Q", "VD90Q",
-                        "MAXVI", "MVI", "MAXVO", "MVO", "MSND", "GD", "GR", "MD", "MEC",
+  dynamic.features <- c("VC", "EC", "MAXVD", "MVD", "VD50Q", "VD75Q", "VD80Q", "VD90Q",
+                        "MAXVI", "MVI", "MAXVO", "MVO", "MSND", "GD", "GR", "MD", "MAXEC",
                         "EC50Q", "EC75Q", "EC80Q", "EC90Q", "VCON", "ECON", "CC")
   dynamic.features <- c(paste0("CG_", dynamic.features), paste0("DD_", dynamic.features))
   results[, (dynamic.features) := NA_real_]
 
-  for(i in 1:project.data[project == "Lang",nr.bugs]){
+  for(i in 1:nr.versions){
+    print(i)
+
+    if(THOMAS.DATA){
+
+      if(!dir.exists(file.path(DATA.PATH, i))){
+        print(paste("----- no data -----"))
+        next
+      }
+      dd.adjacency <- sna::read.dot(paste0(DATA.PATH, "/", i, "/ddg/", "ddg.dot"))
+      dd.graph <- graph_from_adjacency_matrix(dd.adjacency, mode = "directed")
+
+      cg.directory <- file.path(DATA.PATH, i, "cg")
+      cg.files <- list.files(cg.directory)
+      if(length(cg.files) > 0){
+      cg <- lapply(cg.files, function(file.name){
+        return(graph_from_adjacency_matrix(sna::read.dot(file.path(cg.directory, file.name)), mode = "directed"))
+      })
+      cg.graph <- igraph::simplify(Reduce(igraph::union, cg))
+
+      }else{
+        print("empty callgraph")
+        cg.graph <- igraph::make_empty_graph()
+      }
+
+    }else{
 
     ## read graph (.dot format)
     dd.adjacency <- sna::read.dot(paste0(DATA.PATH, "/dataDependency/", i , ".dot"))
@@ -31,7 +59,7 @@ if(!is.na(nr.versions)){
     dd.graph <- graph_from_adjacency_matrix(dd.adjacency, mode = "directed")# dotted edges
     cg.graph <- graph_from_adjacency_matrix(cg.adjacency, mode = "directed")# normal edges
     ## TODO: distinguish data dependency and callgraph edges (bold edges = "in the same basic block") -> the same execution profile!
-
+    }
     ## calculate metrics for call graph and data dependency graph data
     for(type in c("CG", "DD")){
 
@@ -40,6 +68,10 @@ if(!is.na(nr.versions)){
         graph = cg.graph
       }else{
         graph = dd.graph
+      }
+
+      if(vcount(graph) == 0){
+        next
       }
 
       ## count-based metrics
@@ -68,7 +100,7 @@ if(!is.na(nr.versions)){
 
       ## distance-based metrics
       results[i, paste(type, "GD", sep = "_")] <- diameter(graph)
-      results[i, paste(type, "GD", sep = "_")] <- radius(graph)
+      results[i, paste(type, "GR", sep = "_")] <- radius(graph)
 
       results[i, paste(type, "MD", sep = "_")] <- mean_distance(graph, unconnected = FALSE)
 
@@ -87,6 +119,17 @@ if(!is.na(nr.versions)){
 
       ## clustering-based metric
       results[i, paste(type, "CC", sep = "_")] <- transitivity(graph, type = "global")
+
+      faults <- real.faults[id == paste(PROJECT, i, sep="_") & !is.na(faulty.method), faulty.method]
+      if (length(faults) > 0){
+        faulty.vertices <- sapply(faults, function(fault){
+          if(grepl("#", fault, fixed=T)){# real faulty method location
+            return(grep(fault, V(graph)$name, fixed = T))
+          }else{
+            browser()
+          }
+        })
+      }
     }
   }
 
