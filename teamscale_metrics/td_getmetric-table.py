@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 
 import requests
 import os
+import csv
 
 from teamscale_client import TeamscaleClient
 from teamscale_client.constants import ReportFormats
@@ -13,12 +14,18 @@ TEAMSCALE_URL = "http://localhost:8080"
 USERNAME = "admin"
 ACCESS_TOKEN = "F6K3FvEInVLlVMQRgIJ69oUeEIRPsiCE"
 OUTPUT_FILE_NAME = "staticMetrics.csv"
-CSV_SEPERATOR_CHAR = ","
+CSV_SEPERATOR_CHAR = ','
 OUTPUT_DIR = "C:\\study\\SWDiag\\sharedFolder_UbuntuVM\\Metrics_Results"
 # ----------------------- CHANGE THIS BLOCK FOR EACH PROJECT ----------------
-PROJECT_ID = "Mockito"
-VERSIONS = 38
-RELATIVE_PATH = "org/mockito"
+PROJECT_ID = "Closure"
+VERSIONS = 133
+RELATIVE_PATH = "src/com/google"
+NEW_RELATIVE_PATH = "src/com/google/javascript"
+OLD_RELATIVE_PATH = "src/com/google"
+VERSION_NEW_PATH_FROM = 79
+VERSION_NEW_PATH_TILL = 106
+#RELATIVE_PATH = "src/org/mockito"
+#RELATIVE_PATH = "org/mockito"
 # ---------------------- CHANGE THIS BLOCK FOR EACH PROJECT -----------------
 metricNamesIDsMapping = { "Files":"Files",
 "Lines of Code":"LOC",
@@ -30,13 +37,6 @@ metricNamesIDsMapping = { "Files":"Files",
 "Number of Findings in F-CF":"F-CF",
 "Number of Findings in F-ND": "F-ND",
 "Number of Findings in F-UC":"F-UC",
-# "Number of Findings in FB-P" : "FB-P",
-# "Number of Findings in FB-MCV":"FB-MCV",
-# "Number of Findings in FB-SEC": "FB-SEC",
-# "Number of Findings in FB-DC":"FB-DC",
-# "Number of Findings in FB-COR":"FB-COR",
-# "Number of Findings in FB-MCOR":"FB-MCOR",
-# "Number of Findings in FB-BP": "FB-BP",
 "Number of Findings in F-FS":"F-FS",
 "Number of Findings in F-MBB": "F-MBB", 
 "Number of Findings in F-RT":"F-RT",
@@ -48,12 +48,12 @@ metricNamesIDsMapping = { "Files":"Files",
 "Number of Findings in F-ML":"F-ML",
 "Maximum Cyclomatic Complexity":"MAXCC"
 }
-outputFileHeader = ["ProjectID","Version","Files","LOC","SLOC",
+outputFileHeader = ["id","Files","LOC","SLOC",
 "F-HFS","F-MFS","F-LFS","F-PHFS","F-PMFS","F-PLFS",
 "F-HND","F-MND","F-LND","F-PHND","F-PMND","F-PLND",
 "MAXCC","HCC","MCC","LCC","PHCC","PMCC","PLCC",
 "CF", "CF-D",
-"F-CLC", "F-CLC-D",
+"F-CLC",
 "F-BP", "F-BP-D",
 "F-CF", "F-CF-D",
 "F-CL", "F-CL-D",
@@ -76,20 +76,6 @@ def check_metricValues_contains_all_metrics(metricValues):
         print("WARNING: ", numberOfMetrics, " metrics are expected but values for only ", len(metricValues), " were extracted")
         return 0
     return 1
-        
-
-def debug_check_metricList_contains_all_metrics(metricsList):
-    cntr = 0
-    for metric in metricsList:
-        if metric['name'] in metricNamesIDsMapping:
-            print(metric['name'], " : ", metricNamesIDsMapping[metric['name']])
-            cntr +=1
-        else:
-            print("Couldn't find metric: ", metric['name'])
-    print("mapping size : ", len(metricNamesIDsMapping), "   cntr: ", cntr) 
-    
-def extract_metric_assessment_values():
-    return
     
 def extract_values_from_JSON_resp(json):
     metricValues =  dict()
@@ -102,8 +88,6 @@ def extract_values_from_JSON_resp(json):
     if (metricsList == []):
         print("ERROR: Couldn't find metrics list or right metric table entry for current version")
         return metricValues
-#    print("DEBUG: Processing metrics list of size: ", len(metricsList))
-#    debug_check_metricList_contains_all_metrics(metricsList)
     for metric in metricsList:
         if (metric['name'] == "Nesting Depth Assessment"):
             nestingDepthValueDict = metric['value']
@@ -134,29 +118,22 @@ def extract_values_from_JSON_resp(json):
                 metricValues[metricNamesIDsMapping[metric['name']]] = float(metric['stringValue'])
     return metricValues
 
-def create_output_file():
+def create_output_csv_file():
     filePath = OUTPUT_DIR + "\\" + PROJECT_ID + "\\" + OUTPUT_FILE_NAME
-    outputFile = open(filePath, "w+")
+    outputFile = open(filePath, "w", newline='')
     print("DEBUG: Writing values to output file: ", filePath)
     return outputFile
 
 def write_metric_values_to_output_file(f, valuesDict):
-    write_header(f, valuesDict)
+    csvWriter = csv.writer(f, delimiter=CSV_SEPERATOR_CHAR, quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
+    print("DEBUG: Writing header...")
+    csvWriter.writerow(valuesDict[0])
     for lineNumber in range(1,VERSIONS+1):
         print("DEBUG: Writing line for Version ", lineNumber)
-        f.write("\"" + PROJECT_ID + "\"" + CSV_SEPERATOR_CHAR + str(lineNumber))
-        for element in valuesDict[lineNumber]:
-            f.write(CSV_SEPERATOR_CHAR + str(element))
-        f.write("\n")
-
-def write_header(f, valuesDict):
-    print("DEBUG: Writing header...")
-    f.write("\"" + PROJECT_ID + "\"" + "\n")
-    f.write("\"" + valuesDict[0][0] + "\"")                   # ProjectID
-    for element in range(1,len(valuesDict[0])):
-        f.write(CSV_SEPERATOR_CHAR + "\"" + valuesDict[0][element] + "\"")   # ,nextVal
-    f.write("\n")
-    
+        row = [PROJECT_ID + "_" + str(lineNumber)]
+        row.extend(valuesDict[lineNumber])
+        csvWriter.writerow(row)
+ 
 def calculate_proportion_and_density_values(metricValuesDict):
     methodsCount = metricValuesDict['F-HND'] + metricValuesDict['F-MND'] + metricValuesDict['F-LND']
     sloc = metricValuesDict['SLOC']
@@ -171,7 +148,6 @@ def calculate_proportion_and_density_values(metricValuesDict):
     metricValuesDict['F-PMFS'] = metricValuesDict['F-MFS'] / sloc
     metricValuesDict['F-PLFS'] = metricValuesDict['F-LFS'] / sloc
     metricValuesDict['CF-D'] = 1000 * metricValuesDict['CF'] / sloc
-    metricValuesDict['F-CLC-D'] = 1000 * metricValuesDict['F-CLC'] / sloc
     metricValuesDict['F-BP-D'] = 1000 * metricValuesDict['F-BP'] / sloc
     metricValuesDict['F-CF-D'] = 1000 * metricValuesDict['F-CF'] / sloc
     metricValuesDict['F-CL-D'] = 1000 * metricValuesDict['F-CL'] / sloc
@@ -189,7 +165,7 @@ def calculate_proportion_and_density_values(metricValuesDict):
 def get_ordered_metric_values(metricValuesDict):
     valuesList = []
     for element in outputFileHeader:
-        if (element == "ProjectID" or element == "Version"):
+        if (element == "id"):
             continue
         valuesList.append(metricValuesDict[element])
     return valuesList
@@ -202,6 +178,10 @@ if __name__ == '__main__':
     metricValuesAllVersions = dict()
     metricValuesAllVersions[0] = outputFileHeader
     for versionCntr in range(0,VERSIONS):      # range end is excluding
+        if (versionCntr+1 >= VERSION_NEW_PATH_FROM):
+            RELATIVE_PATH = NEW_RELATIVE_PATH
+        if (versionCntr+1 > VERSION_NEW_PATH_TILL):
+            RELATIVE_PATH = OLD_RELATIVE_PATH
         versionTimestamp = firstVersionTimestamp + versionCntr * versionsInterval + 10000000
         print("DEBUG: Processing version ", versionCntr+1, "    timestamp of REST request: ", versionTimestamp)
         parameters = {"t":"default:" + str(versionTimestamp), "configurationName":"Teamscale Default"}
@@ -214,12 +194,12 @@ if __name__ == '__main__':
             print("ERROR: Program won't export metric values for version " , versionCntr + 1)
             metricValuesAllVersions[versionCntr+1] = ["ERROR: not all metric values could be queried"]
     print("DEBUG: Finished extracting metric values")
-    f = create_output_file()
+    f = create_output_csv_file()
     write_metric_values_to_output_file(f, metricValuesAllVersions)
     f.close()
-    CSV_SEPERATOR_CHAR = ";"
+    CSV_SEPERATOR_CHAR = ';'
     OUTPUT_FILE_NAME = "staticMetrics_excel_format.csv"
-    f = create_output_file()
+    f = create_output_csv_file()
     write_metric_values_to_output_file(f, metricValuesAllVersions)
     f.close()
     print("Program Finished!")

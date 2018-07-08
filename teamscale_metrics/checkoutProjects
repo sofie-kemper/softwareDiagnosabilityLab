@@ -1,0 +1,19 @@
+#!/bin/bash
+
+PROJECT_NAME="Chart"
+MAX_VERSION=26
+PROJECT_PATH="/media/sf_sharedFolder_UbuntuVM/${PROJECT_NAME}_buggy/"
+echo $PROJECT_PATH
+echo $PROJECT_NAME
+echo $MAX_VERSION
+
+i=1
+while [ $i -le $MAX_VERSION ]
+do
+    VERSION=${i}b
+    VERSION_PATH=${PROJECT_PATH}$i
+    echo "checkout version $VERSION of project $PROJECT_NAME to path $VERSION_PATH"
+    defects4j checkout -p $PROJECT_NAME -v $VERSION -w $VERSION_PATH
+    let i=i+1
+done
+echo "Program finished!"
