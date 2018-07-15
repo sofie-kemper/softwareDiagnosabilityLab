@@ -1,0 +1,59 @@
+\BOOKMARK [1][-]{section.1}{Metrics}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Static Metrics}{section.1}% 2
+\BOOKMARK [3][-]{subsubsection.1.1.1}{Size and Complexity Information}{subsection.1.1}% 3
+\BOOKMARK [3][-]{subsubsection.1.1.2}{Coupling and Cohesion Metrics}{subsection.1.1}% 4
+\BOOKMARK [3][-]{subsubsection.1.1.3}{FindBugs-Findings}{subsection.1.1}% 5
+\BOOKMARK [3][-]{subsubsection.1.1.4}{TeamScale-Findings}{subsection.1.1}% 6
+\BOOKMARK [2][-]{subsection.1.2}{Dynamic Metrics}{section.1}% 7
+\BOOKMARK [3][-]{subsubsection.1.2.1}{Vertex Count \(DD-VC, CG-VC\)}{subsection.1.2}% 8
+\BOOKMARK [3][-]{subsubsection.1.2.2}{Edge Count \(DD-EC, CG-EC\)}{subsection.1.2}% 9
+\BOOKMARK [3][-]{subsubsection.1.2.3}{Simplified Edge Count \(DD-SEC, CG-SEC\)}{subsection.1.2}% 10
+\BOOKMARK [3][-]{subsubsection.1.2.4}{Multi-Edge Proportion \(DD-MEP, CG-MEP\)}{subsection.1.2}% 11
+\BOOKMARK [3][-]{subsubsection.1.2.5}{Maximum Vertex Degree \(DD-MAXVD, CG-MAXVD\)}{subsection.1.2}% 12
+\BOOKMARK [3][-]{subsubsection.1.2.6}{Mean Vertex Degree \(DD-MVD, CG-MVD\)}{subsection.1.2}% 13
+\BOOKMARK [3][-]{subsubsection.1.2.7}{Vertex Degree Quantiles \(DD-VD*Q, CG-VD*Q\)}{subsection.1.2}% 14
+\BOOKMARK [3][-]{subsubsection.1.2.8}{Maximum Vertex In-Degree \(DD-MAXVI, CG-MAXVI\)}{subsection.1.2}% 15
+\BOOKMARK [3][-]{subsubsection.1.2.9}{Mean Vertex In-Degree \(DD-MVI, CG-MVI\)}{subsection.1.2}% 16
+\BOOKMARK [3][-]{subsubsection.1.2.10}{Maximum Vertex Out-Degree \(DD-MAXVO, CG-MAXVO\)}{subsection.1.2}% 17
+\BOOKMARK [3][-]{subsubsection.1.2.11}{Mean Vertex Out-Degree \(DD-MVO, CG-MVO\)}{subsection.1.2}% 18
+\BOOKMARK [3][-]{subsubsection.1.2.12}{Mean Start-Node Degree \(DD-MSND, CG-MSND\)}{subsection.1.2}% 19
+\BOOKMARK [3][-]{subsubsection.1.2.13}{Graph Diameter \(DD-GD, CG-GD\)}{subsection.1.2}% 20
+\BOOKMARK [3][-]{subsubsection.1.2.14}{Graph Radius \(DD-GR, CG-GR\)}{subsection.1.2}% 21
+\BOOKMARK [3][-]{subsubsection.1.2.15}{Mean Distance \(DD-MD, CG-MD\)}{subsection.1.2}% 22
+\BOOKMARK [3][-]{subsubsection.1.2.16}{Maximum Eigenvector Centrality \(DD-MEC, CG-MEC\)}{subsection.1.2}% 23
+\BOOKMARK [3][-]{subsubsection.1.2.17}{Eigenvector Centrality Quantiles \(DD-EC*Q, CG-EC*Q\)}{subsection.1.2}% 24
+\BOOKMARK [3][-]{subsubsection.1.2.18}{Vertex Connectivity \(DD-VCON, CG-VCON\)}{subsection.1.2}% 25
+\BOOKMARK [3][-]{subsubsection.1.2.19}{Edge Connectivity \(DD-ECON, CG-ECON\)}{subsection.1.2}% 26
+\BOOKMARK [3][-]{subsubsection.1.2.20}{\(Average\) Clustering Coefficient \(DD-CC, CG-CC\)}{subsection.1.2}% 27
+\BOOKMARK [2][-]{subsection.1.3}{Test Suite Characteristics}{section.1}% 28
+\BOOKMARK [3][-]{subsubsection.1.3.1}{Number of Relevant Passed Test Cases \(T-NP\)}{subsection.1.3}% 29
+\BOOKMARK [3][-]{subsubsection.1.3.2}{Proportion of Passed Test Cases \(T-PP\)}{subsection.1.3}% 30
+\BOOKMARK [3][-]{subsubsection.1.3.3}{Number of Failed Test Cases \(T-NF\)}{subsection.1.3}% 31
+\BOOKMARK [3][-]{subsubsection.1.3.4}{Proportion of Failed Test Cases \(T-PF\)}{subsection.1.3}% 32
+\BOOKMARK [3][-]{subsubsection.1.3.5}{Number of Test Cases \(T-N\)}{subsection.1.3}% 33
+\BOOKMARK [3][-]{subsubsection.1.3.6}{Number of Relevant Test Cases \(T-RN\)}{subsection.1.3}% 34
+\BOOKMARK [3][-]{subsubsection.1.3.7}{Proportion of Relevant Test Cases \(T-RP\)}{subsection.1.3}% 35
+\BOOKMARK [3][-]{subsubsection.1.3.8}{Test Case Density \(T-DSLOC\)}{subsection.1.3}% 36
+\BOOKMARK [3][-]{subsubsection.1.3.9}{Test Size \(T-SLOC\)}{subsection.1.3}% 37
+\BOOKMARK [3][-]{subsubsection.1.3.10}{Relative Test Size \(T-RSLOC\)}{subsection.1.3}% 38
+\BOOKMARK [3][-]{subsubsection.1.3.11}{Test Density \(T-D\)}{subsection.1.3}% 39
+\BOOKMARK [3][-]{subsubsection.1.3.12}{Test Diversity \(T-G\)}{subsection.1.3}% 40
+\BOOKMARK [3][-]{subsubsection.1.3.13}{Test Uniqueness \(T-U\)}{subsection.1.3}% 41
+\BOOKMARK [3][-]{subsubsection.1.3.14}{Perez et al's diagnostic predictor \(T-DDU\)}{subsection.1.3}% 42
+\BOOKMARK [2][-]{subsection.1.4}{Bug Characteristics}{section.1}% 43
+\BOOKMARK [3][-]{subsubsection.1.4.1}{Number of Files \(B-NF\)}{subsection.1.4}% 44
+\BOOKMARK [3][-]{subsubsection.1.4.2}{Number of Classes \(B-NC\)}{subsection.1.4}% 45
+\BOOKMARK [3][-]{subsubsection.1.4.3}{Number of Methods \(B-NM\)}{subsection.1.4}% 46
+\BOOKMARK [3][-]{subsubsection.1.4.4}{Number of Lines \(B-NL\)}{subsection.1.4}% 47
+\BOOKMARK [3][-]{subsubsection.1.4.5}{Number of Lines Added/Removed/Modified \(B-NAL/B-NRL/B-NML\)}{subsection.1.4}% 48
+\BOOKMARK [3][-]{subsubsection.1.4.6}{Number of Chunks \(B-NCH\)}{subsection.1.4}% 49
+\BOOKMARK [3][-]{subsubsection.1.4.7}{Number of Repair Patterns \(B-NRP\)}{subsection.1.4}% 50
+\BOOKMARK [3][-]{subsubsection.1.4.8}{Number of Repair Actions \(B-NRA\)}{subsection.1.4}% 51
+\BOOKMARK [1][-]{section.2}{Tools}{}% 52
+\BOOKMARK [2][-]{subsection.2.1}{Lizard}{section.2}% 53
+\BOOKMARK [2][-]{subsection.2.2}{TeamScale}{section.2}% 54
+\BOOKMARK [2][-]{subsection.2.3}{JPeek}{section.2}% 55
+\BOOKMARK [3][-]{subsubsection.2.3.1}{JDCallgraph}{subsection.2.3}% 56
+\BOOKMARK [2][-]{subsection.2.4}{R igraph Library}{section.2}% 57
+\BOOKMARK [2][-]{subsection.2.5}{Gzoltar}{section.2}% 58
+\BOOKMARK [2][-]{subsection.2.6}{Defects4J Dissection}{section.2}% 59

@@ -1,0 +1,47 @@
+\documentclass{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage{todonotes}
+
+\begin{document}
+
+\title{Design and Software Quality Metrics}
+\subtitle{Exploring the Relationship between Design Metrics and Software
+Diagnosability using Machine Learning (2018)}
+\author{Thomas Dornberger \and Sofie Kemper}
+\date{2018-05-31}
+
+\maketitle
+
+\section{Metrics}
+
+\input{metrics_static.tex}
+
+\input{metrics_dynamic.tex}
+
+\input{metrics_test.tex}
+
+\input{metrics_bug.tex}
+
+
+\section{Tools}
+
+We have tried a multitude of different tools (SourceMeter, LOCC, SonarQube,
+CCCC, USC CodeCount, CLOC, etc.) and chosen the following for the interesting
+metrics they provide as well as the possibility to automate their usage, i.e.,
+the possibility to execute them on the command line and output formats that can
+be easily parsed and used for our purposes.
+
+\input{tools_static.tex}
+
+\input{tools_dynamic.tex}
+
+\input{tools_test.tex}
+
+\input{tools_bug.tex}
+
+\end{document}

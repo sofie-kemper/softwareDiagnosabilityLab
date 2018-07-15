@@ -1,0 +1,46 @@
+PROGRESS:
+
+week 1:
+-Thomas: Trying to set up Defects4j on Windows (including setting up Perl and ant for windows) - Problems: git apply error during checkout, build errors for some of the projects during compile
+-Thomas: Setting up gzoltar - NullPointerException during analysis
+-Thomas: Reading some papers on fault localization/previous research
+-Sofie: Setting up Defects4j
+-Sofie: Trying to set up gzoltar (somehow doesn't work on Mac, NullpointerException)
+-Sofie: Finding some books on Software Design/Code Metrics
+
+week 2:
+-Sofie: implementing script for computing suspiciousness scores (all available metrics)
+-Sofie: automating the suspiciousness score generation + ranking + qualitative analysis (threshold)
+-Sofie: adapting the bitbucket scripts so that they run on OSX -> we can now generate method-level coverage data
+-Sofie: generating method-level coverage data for Lang-project
+-Sofie/Thomas: read research on relation (organisational structure/code metrics)&(error proneness), analysis/ideas how this is applicable to our OSS projects
+-Thomas: download & skim result data for Time bug 3 (statement level)
+-Thomas: understand R-script to compute suspiciousness score provided by Sofie
+
+week 3:
+-Sofie: read papers on graph metrics
+-Sofie: investigate at options and output format of JDCallgraph
+-Sofie: select dynamic metrics to investigate and appropriate R packages
+-Thomas: research about static metrics and tools to detect code smells
+-Thomas: finally set up defects4j in Ubuntu VM
+-Thomas: configure Teamscale and prepare Analysis profile, select appropriate code smells
+
+week 4:
+-Sofie: implement dynamic metrics as script
+-Thomas: research on graph metrics, read paper about relation of graph metrics to factors like bugs severity, maintainability
+-Thomas: implement python REST client to query static metrics from teamscale and transform them into an appropriate format
+
+week 5:
+-Thomas: refine python REST client - add calculation of density and propotion metrics
+-Thomas: research on test suite metrics (especially DDU), gather ideas on bug metrics
+-?? Sofie: implemetation of DDU
+
+week 6:
+-Thomas: research about ML techniques
+-Thomas: Extract Teamscale metrics on buggy files as bug metrics
+-?? Sofie: extract bug metrics from defects4j dissection
+-?? Sofie: calculate dynamic metrics on buggy nodes
+-?? Sofie: matching of faulty methods from defects4j to gzoltar
+
+week 7:
+-Thomas: setup of jdcallgraph and dot file generation

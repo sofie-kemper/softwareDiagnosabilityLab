@@ -1,0 +1,19 @@
+\subsubsection{JDCallgraph}
+\label{sec:jdcallgraph}
+
+JDCallgraph is a tool for dynamic call graph generation for Java. Call graphs as
+well as data dependency graphs can be computed and are provided in .dot format.
+In addition, JDCallgraph can provide coverage and other information which we do
+not use in this project. More details can be found via
+\url{https://github.com/dkarv/jdcallgraph}.
+
+The .dot-files are read into R (see \ref{sec:igraph}) via the R library sna (see
+\url{https://www.rdocumentation.org/packages/sna)}.
+
+\subsection{R igraph Library}
+\label{sec:igraph}
+
+igraph is a library for network analysis. It is available for R, Python, and C
+and allows fast and comfortable processing of large graphs. Many standard graph
+metrics as well as an efficient graph data structure  are provided by this
+library. More information can be found via \url{http://igraph.org/r/}.

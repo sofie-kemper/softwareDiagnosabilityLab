@@ -1,0 +1,44 @@
+\subsection{Lizard}
+\label{sec:lizard}
+
+Lizard is a Python-based tool that analyses code size and perceived code
+complexity as well as parameter and token counts at the function level. It can
+analyse Java, C/C++, JavaScript, Python, Ruby, Swift, PHP, Scala, and Objective
+C scripts.  More information can be found at
+\url{https://pypi.org/project/lizard/}.
+
+\subsection{TeamScale}
+\label{sec:teamscale}
+
+TeamScale is a tool that provides a multitude of static code analyses to
+indicate code quality and possible quality defects (\enquote{findings}). It is
+free for academic usage. The tool monitors the quality of code over time by
+using manualyy checked-in versions or automatically detected versions of a given
+repository. By using the diffs between versions, it can quickly analyse the
+history of a project. The tool FindBugs (see
+\url{http://findbugs.sourceforge.net}) is also contained in TeamScale. The
+metrics are calculated on the file or even method level and aggregated
+hierarchically. Hence, we can obtain project metrics easily.
+
+More information regarding TeamScale can be found at
+\url{https://www.cqse.eu/en/products/teamscale/landing/}.
+
+We have implemented a REST-client to automatically query the metric values from
+TeamScale and to transform them into a format we can easily use for our
+analysis.
+
+\subsection{JPeek}
+\label{sec:jpeek}
+
+JPeek is a static collector of Java code metrics relating to cohesion and
+coupling. It measures 5 metrics on the method level and aggregates this data
+quantitatively, e.g., calculating min, max, variance, and other statistical
+measures,  as well as qualitatively, i.e., \enquote{scoring} components as a
+whole and categorising them into the three classes \enquote{green},
+\enquote{yellow}, and \enquote{red}. In addition, it defines and measures
+\enquote{defects} which are classes whose scores particularly bad using the mean
+scores as baseline.  
+
+We use the version JPeek 0.26.3. For more information on the tool, the
+interested reader is referred to \url{http://www.jpeek.org} and
+\url{https://github.com/yegor256/jpeek}.

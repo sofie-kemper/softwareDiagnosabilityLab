@@ -1,0 +1,32 @@
+Allgemein
+    - kein Meeting in den nächsten 2 Wochen
+
+Questions
+    Should we use Math call graphs? Yes
+    Especially should we use the versions with differing test cases?
+        --> yes, in general only use callgraphs of the failing tests
+
+Abgabe 21.06 - Improvements
+	What did we imporve and why? What has changed in our mind?
+        (sentences like "I've learned XY is not important and that's why I have to focus more on/ consider ZY" are also desired).
+	If we didn't change anything, explain why
+
+Vorschläge für Improvement Abgabe:
+	Combination von static and dynamic (und weitere?) nehmen, da wir gelernt haben dass es nicht genügt nur eines von beiden separat zu betrachten
+    - static metrics auf ganzes projekt bezogen eher unwichtig??
+    - nicht die Menge an features sondern vielmehr die qualität dieser ist wichtig --> manuell features auswählen die vielversprechend sind und daraus Model generieren
+
+    Changing targets -> not worst-case scenario, but instead avg-case (all with lower rank + half with equal rank)
+    In cases where D_Star cannot be calculated (e.g., Chart 13, artifact org.jfree.chart.block.RectangleConstraint#89) we score this as "maximally bad" software diagnosability (we need to look at almost all components)
+
+Visualization
+	Vizualization important in industry, but don't spend too much time on it for this Lab
+	If we build different models: It's a good thing to visualize the models and compare them
+
+Final result:
+    Which set of features are the best?
+    If we do ML and don't find good results
+	We still can do correlation between feature and accuracy
+		(--> to get overview what is useless/ could be important)
+    She will compare our results/ models to see which one is the best
+        best means which has the best accuracy (I think?) she will tell us which accuracy score we should calcualte for the model (probably F-score)
