@@ -5,8 +5,9 @@
 # Session Data files
 .RData
 
-# data folder
-/coverageData/*
+# data and results folders
+/data/*
+/results/*
 
 .DS_Store
 
