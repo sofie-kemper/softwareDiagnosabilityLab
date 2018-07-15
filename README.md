@@ -91,3 +91,26 @@ Computes the F1 'mean' score and plots a Confusion matrix. Uses fine-grained cla
 Computes the r2-score, the model performs rather bad (due to the highly scattered target values).
 
 #### Non-maintained scripts: DecisionTreeRegression_noTestSplit.py, plot_utils.py
+
+# Requirements
+
+## R
+
+- R 3.4.0
+- data.table
+- ggplot2
+- caTools
+- corrplot
+- Hmisc
+- jsonlite
+- sna
+- plyr
+
+## Python
+
+- Python 3
+- pandas
+- sklearn
+- numpy
+- matplotlib
+- itertools
