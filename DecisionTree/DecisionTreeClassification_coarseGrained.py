@@ -1,4 +1,4 @@
-import pandas as pd  
+import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import Imputer
@@ -6,18 +6,26 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn import metrics
 import Classification_utils
 
-dataset = pd.read_csv('C:\\study\\PythonTutorial\\data\\features\\combinedData.csv')
-targets = pd.read_csv('C:\\study\\PythonTutorial\\data\\features\\targets.csv')
+dataset = pd.read_csv('../data/combinedData.csv')
+targets = pd.read_csv('../data/targets.csv')
 drop_ids = ['Chart_12','Chart_23',
             'Closure_28','Closure_43','Closure_46','Closure_90',
             'Lang_23','Lang_25','Lang_56',
             'Math_12','Math_35','Math_61','Math_104',
-            'Time_2','Time_11', 'Time_23']
+            'Time_2','Time_11', 'Time_23', 'Mockito_1','Mockito_2','Mockito_3',
+            'Mockito_4','Mockito_5','Mockito_6','Mockito_7','Mockito_8','Mockito_9',
+            'Mockito_10','Mockito_11','Mockito_12','Mockito_13','Mockito_14',
+            'Mockito_15','Mockito_16','Mockito_17','Mockito_18','Mockito_19',
+            'Mockito_20','Mockito_21','Mockito_22','Mockito_23','Mockito_24',
+            'Mockito_25','Mockito_26','Mockito_27','Mockito_28','Mockito_29',
+            'Mockito_30','Mockito_31','Mockito_32','Mockito_33','Mockito_34',
+            'Mockito_35','Mockito_36','Mockito_37', 'Mockito_38']
 dataset = dataset.query('id not in @drop_ids')
 dataset.sort_values('id', inplace=True)
 dataset.reset_index(drop=True, inplace=True)
 X = dataset.drop('id', axis=1)
 
+targets = targets.query('id not in @drop_ids')
 targets.sort_values('id', inplace=True)
 targets.reset_index(drop=True, inplace=True)
 y = targets['nr_to_examine_dstar_2']
@@ -57,7 +65,7 @@ plt_cm.plot_confusion_matrix(cm, classes=class_names,
                              normalize=True)
 
 from sklearn.tree import export_graphviz
-export_graphviz(tree, out_file='classification_tree.dot',
+export_graphviz(tree, out_file='../results/decisionTree/classification_tree.dot',
                 feature_names=X.columns,
                 filled=True, rounded=True,
                 special_characters=True)
