@@ -1,6 +1,8 @@
 # Exploring the Relationship between Design Metrics and Software Diagnosability
 Seminar: summer term 2018, TUM
+
 Thomas Dornberger, Sofie Kemper
+
 Advisor: Mojdeh Golagha
 
 GitHub repository: https://github.com/sofie-kemper/softwareDiagnosabilityLab
