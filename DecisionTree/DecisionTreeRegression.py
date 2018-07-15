@@ -29,7 +29,7 @@ imp = Imputer(missing_values="NaN", strategy="mean", axis=0)
 X_train = imp.fit_transform(X_train)
 X_test = imp.fit_transform(X_test)
 
-regressor = DecisionTreeRegressor(min_weight_fraction_leaf=0.03, max_depth=5)
+regressor = DecisionTreeRegressor()  #min_weight_fraction_leaf=0.03, max_depth=5)
 scores = cross_val_score(estimator=regressor, X=X_train, y=y_train, cv=3)
 print('---cross validation scores')
 print(scores)
