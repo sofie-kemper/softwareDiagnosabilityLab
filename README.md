@@ -79,4 +79,15 @@ This script performs an linear regression analysis of the indicated dataset. The
 
 ## decisionTree
 
-TODO Thomas
+The scripts perform a decision tree analysis of the indicated dataset. The paths to the combinedData.csv and targets.csv must be set to the paths on your local drive. The python scripts use the library scikit learn and are called without providing any parameters. They build the model, calculate metrics and export a dot file tree.dot containing the decision tree using graphviz. The .dot file can be transformed to a png using 'dot -Tpng tree.dot -o tree.png' in the command line afterwards
+
+### DecisionTreeClassification_coarseGrained.py
+Computes the F1-score, the accuracy and plots a Confusion matrix (using the script plot_confusion_matrix.py). Uses coarse-grained class labels: useful (1-11) useless (>11)
+
+### DecisionTreeClassification_fineGrained.py
+Computes the F1 'mean' score and plots a Confusion matrix. Uses fine-grained class labels: perfect (1) good (2-4) medium (5-11) useless (>11)
+
+### DecisionTreeRegression.py
+Computes the r2-score, the model performs rather bad (due to the highly scattered target values).
+
+#### Non-maintained scripts: DecisionTreeRegression_noTestSplit.py, plot_utils.py
