@@ -41,7 +41,7 @@ print('-------Score on training data')
 print(regressor.score(X_train, y_train))
 
 from sklearn.tree import export_graphviz
-export_graphviz(regressor, out_file='tree_maxDepth5.dot',
+export_graphviz(regressor, out_file='regression_tree.dot',
                 feature_names=X.columns,
                 filled=True, rounded=True,
                 special_characters=True)
