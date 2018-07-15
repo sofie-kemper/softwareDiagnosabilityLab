@@ -1,15 +1,14 @@
-# Exploring the Relationship between Design Metrics and Software Diagnosability
-Seminar: summer term 2018, TUM
-
-Thomas Dornberger, Sofie Kemper
-
-Advisor: Mojdeh Golagha
+# Exploring the Relationship between Design Metrics and Software Diagnosability using Machine Learning
 
 GitHub repository: https://github.com/sofie-kemper/softwareDiagnosabilityLab
 
-# Results
+This repository provides analysis and data generation scripts for exploring possible relationships between software desing metrics (static, dynamic, test, and bug metrics) and the quality of spectrum-based fault localisation (i.e., predictions of fault locations). We use linear regression as well as decision trees to investigate this relationship.
 
-We use the number of methods to examine until the first faulty method is found (average-case in cases of rank-ties) (respectively, its log transformation) as target for our machine learning. In addition, we use a classification based on this target.
+Contributors: Thomas Dornberger, Sofie Kemper
+
+Advisor: Mojdeh Golagha
+
+# Results
 
 The final metrics we have found to be good predictors for the quality of spectrum-based fault localisation, are the following:
 - CG_MAXVO = maximum vertex outdegree in callgraph; well-suited for correlation-based analyses (e.g., linear regression) as well as split-based analyses (e.g., decision trees)
@@ -21,7 +20,9 @@ The final metrics we have found to be good predictors for the quality of spectru
 - T_DDU = density-diversity-uniqueness of test suite; well-suited for split-based analyses
 - T_NF = absolute number of failing tests; well-suited for split-based analyses
 
-All results regarding callgraphs, data dependency graphs, and test suites are based only on the relevant tests and components (see documentation of gzoltar for further info).
+All metrics regarding callgraphs, data dependency graphs, and test suites are based only on the relevant tests and components (see documentation of gzoltar for further info).
+
+We use the number of methods a developer needs to examine until the first faulty method is found (respectively, its log transformation) as target for our machine learning. In addition, we use a classification based on this target.
 
 # Folder Structure
 
