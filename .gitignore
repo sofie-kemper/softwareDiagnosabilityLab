@@ -8,6 +8,7 @@
 # data and results folders
 /data/*
 /results/*
+*.png
 
 .DS_Store
 

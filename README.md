@@ -28,7 +28,7 @@ We use the number of methods a developer needs to examine until the first faulty
 
 All data is in the folder "data". This includes raw data, e.g., the gzoltar files as well as pre-processed data and metric analysis results, e.g., dynamic metrics. The latter are generated using scripts in "dataGeneration". Where applicable, all data is provided in CSV format, which can be read in with almost all technologies. The final dataset consists of "data/combinedData_w_target.csv" (features + targets), "data/combinedData.csv" (only features), and "data/targets.csv" (only targets).
 
-The analysis scripts are organised in three categories and corresponding folders: "dataExploration", "decisionTree", and "linearRegression". The "results" folder containing all final results (e.g., feature-feature correlation plots) is also divided into "dataExploration" and "linearRegression". The results for the decision tree analyses lie in the analysis directories.
+The analysis scripts are organised in three categories and corresponding folders: "dataExploration", "decisionTree", and "linearRegression". The "results" folder containing all final results (e.g., feature-feature correlation plots) is also structured in these same categories, i.e., contains three subdirectories.
 
 The "documentation" folder contains some project and analysis documentation, e.g., the pdf containing all metrics used, the final presentation as pdf and pptx, etc.
 
@@ -94,7 +94,7 @@ Computes the r2-score, the model performs rather bad (due to the highly scattere
 
 # Requirements
 
-## R
+### R
 
 - R 3.4.0
 - data.table
@@ -106,7 +106,7 @@ Computes the r2-score, the model performs rather bad (due to the highly scattere
 - sna
 - plyr
 
-## Python
+### Python
 
 - Python 3
 - pandas
@@ -114,3 +114,7 @@ Computes the r2-score, the model performs rather bad (due to the highly scattere
 - numpy
 - matplotlib
 - itertools
+
+### Other
+
+- graphviz
