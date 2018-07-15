@@ -8,6 +8,10 @@ setwd("/Users/sofiekemper/Documents/Uni/SS2018/lab/softwareDiagnosabilityLab")
 DATA.PATH <- "data"
 RESULTS.PATH <- "results/linearRegression"
 
+# should resluts of every linear regression model be written to a separate txt file
+# (in addition to the saved overview which contains all this information)
+WRITE.SINGLE.RESULTS <- FALSE
+
 ## DATA PREPARATION
 
 ## read in data

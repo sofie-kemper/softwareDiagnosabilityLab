@@ -1,7 +1,9 @@
 # Exploring the Relationship between Design Metrics and Software Diagnosability
-##Seminar: summer term 2018, TUM
-### Thomas Dornberger, Sofie Kemper
-###Advisor: Mojdeh Golagha
+Seminar: summer term 2018, TUM
+Thomas Dornberger, Sofie Kemper
+Advisor: Mojdeh Golagha
+
+GitHub repository: https://github.com/sofie-kemper/softwareDiagnosabilityLab
 
 # Results
 
@@ -66,4 +68,12 @@ This script performs different data exploration techniques, e.g., correlation an
 
 ## linearRegression
 
+### linearRegression.R
+
+This script performs an linear regression analysis of the indicated dataset. The target value to consider as well as the features/feature combinations can be specified. The script writes its results to "results/linearRegression" in the specified CSV files, as a txt-file with name "TARGET~FEATURE1+FEATURE2+...+FEATUREn.txt" if the corresponding option was set.
+
+### Non-maintained scripts: linearRegression.py, linearRegression_PCA.R
+
 ## decisionTree
+
+TODO Thomas
