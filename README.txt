@@ -3,7 +3,9 @@ Seminar: summer term 2018, TUM
 Thomas Dornberger, Sofie Kemper
 Advisor: Mojdeh Golagha
 
-## Results
+### Results ###
+
+We use the number of methods to examine until the first faulty method is found (average-case in cases of rank-ties) (respectively, its log transformation) as target for our machine learning. In addition, we use a classification based on this target.
 
 The final metrics we have found to be good predictors for the quality of spectrum-based fault localisation, are the following:
 - CG_MAXVO = maximum vertex outdegree in callgraph; well-suited for correlation-based analyses (e.g., linear regression) as well as split-based analyses (e.g., decision trees)
@@ -17,6 +19,53 @@ The final metrics we have found to be good predictors for the quality of spectru
 
 All results regarding callgraphs, data dependency graphs, and test suites are based only on the relevant tests and components (see documentation of gzoltar for further info).
 
-## Folder Structure
+### Folder Structure ###
 
-## Description of Scripts
+All data is in the folder "data". This includes raw data, e.g., the gzoltar files as well as pre-processed data and metric analysis results, e.g., dynamic metrics. The latter are generated using scripts in "dataGeneration". Where applicable, all data is provided in CSV format, which can be read in with almost all technologies. The final dataset consists of "data/combinedData_w_target.csv" (features + targets), "data/combinedData.csv" (only features), and "data/targets.csv" (only targets).
+
+The analysis scripts are organised in three categories and corresponding folders: "dataExploration", "decisionTree", and "linearRegression". The "results" folder containing all final results (e.g., feature-feature correlation plots) is divided into these same categories, i.e., three subfolders.
+
+The "documentation" folder contains some project and analysis documentation, e.g., the pdf containing all metrics used, the final presentation as pdf and pptx, etc.
+
+### Description of Scripts ###
+
+All script descriptions are ordered by subfolder and execution order.
+
+## dataGeneration
+
+# subfolder: teamscale_metrics
+The subfolder contains all scripts for the extraction and processing of teamscale metrics as well as a detailed README on how these metrics are obtained.
+
+# suspiciousnessScore_util.R
+This utility-script provides several methods for pre-processing data (in order to provide uniform formats), calculating suspiciousness scores and processing these to obtain meaningful target values.
+
+# suspiciousnessScore.R
+This script generates the target values based on suspiciousness of artifacts and real fault locations for one project at a time. Its results are written to "data/PROJECT_suspiciousness.csv".
+
+# graphMetrics.R
+This script analyses callgraph and data dependency graph files to create dynamic metrics. It analyses one project at a time and its results are written to "data/graphs/PROJECT/dynamic_metrics.csv".
+
+# extractRealFaults.R
+This script matches provided location of faults to the corresponding method names (in our gzoltar format). Its results are written to "data/realFaults/faults.csv". The file "data/realFaults/faults_handwritten.csv" contains the same information supplemented by the manually evaluated faults. This is the file used for all analyses.
+
+# testStatistics.R
+This script analyses gzoltar files one project at a time to generate test statistics which are written to "/data/PROJECT_testStatistics.csv".
+
+# combineData.R
+This script is used to combine the different features and targets (teamscale, dynamic, test, bug, targets) into one single data.frame. Its results are written to "data/combinedData_w_target.csv" (features + targets), "data/combinedData.csv" (only features), and "data/targets.csv" (only targets).
+
+# Non-maintained scripts: findBuggyMethods.R
+
+## dataExploration
+
+# dataExploration.R
+
+This script performs different data exploration techniques, e.g., correlation and variance analyses as well as PCA. Its results (mostly plots) are saved in "results/dataExploration".
+
+# Non-maintained scripts: correlationAnalysis.R
+
+## linearRegression
+
+
+
+## decisionTree
