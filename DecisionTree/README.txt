@@ -1,3 +1,8 @@
+In the scripts the path to the csv file containing all metric values and the csv file containing the target values
+need to be adjusted before running them.
+        C:\\study\\PythonTutorial\\data\\features\\combinedData.csv
+        C:\\study\\PythonTutorial\\data\\features\\targets.csv
+
 Script DecisionTreeClassification_coarseGrained.py
     creates a decision tree classification model on all features
     performs train test split and cross 3-fold validation
