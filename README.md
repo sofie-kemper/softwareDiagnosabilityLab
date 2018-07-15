@@ -58,7 +58,7 @@ This script analyses gzoltar files one project at a time to generate test statis
 ### combineData.R
 This script is used to combine the different features and targets (teamscale, dynamic, test, bug, targets) into one single data.frame. Its results are written to "data/combinedData_w_target.csv" (features + targets), "data/combinedData.csv" (only features), and "data/targets.csv" (only targets).
 
-### Non-maintained scripts: findBuggyMethods.R
+#### Non-maintained scripts: findBuggyMethods.R
 
 ## dataExploration
 
@@ -66,7 +66,7 @@ This script is used to combine the different features and targets (teamscale, dy
 
 This script performs different data exploration techniques, e.g., correlation and variance analyses as well as PCA. Its results (mostly plots) are saved in "results/dataExploration".
 
-### Non-maintained scripts: correlationAnalysis.R
+#### Non-maintained scripts: correlationAnalysis.R
 
 ## linearRegression
 
@@ -74,7 +74,7 @@ This script performs different data exploration techniques, e.g., correlation an
 
 This script performs an linear regression analysis of the indicated dataset. The target value to consider as well as the features/feature combinations can be specified. The script writes its results to "results/linearRegression" in the specified CSV files, as a txt-file with name "TARGET~FEATURE1+FEATURE2+...+FEATUREn.txt" if the corresponding option was set.
 
-### Non-maintained scripts: linearRegression.py, linearRegression_PCA.R
+#### Non-maintained scripts: linearRegression.py, linearRegression_PCA.R
 
 ## decisionTree
 
