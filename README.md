@@ -28,7 +28,7 @@ We use the number of methods a developer needs to examine until the first faulty
 
 All data is in the folder "data". This includes raw data, e.g., the gzoltar files as well as pre-processed data and metric analysis results, e.g., dynamic metrics. The latter are generated using scripts in "dataGeneration". Where applicable, all data is provided in CSV format, which can be read in with almost all technologies. The final dataset consists of "data/combinedData_w_target.csv" (features + targets), "data/combinedData.csv" (only features), and "data/targets.csv" (only targets).
 
-The analysis scripts are organised in three categories and corresponding folders: "dataExploration", "decisionTree", and "linearRegression". The "results" folder containing all final results (e.g., feature-feature correlation plots) is divided into these same categories, i.e., three subfolders.
+The analysis scripts are organised in three categories and corresponding folders: "dataExploration", "decisionTree", and "linearRegression". The "results" folder containing all final results (e.g., feature-feature correlation plots) is also divided into "dataExploration" and "linearRegression". The results for the decision tree analyses lie in the analysis directories.
 
 The "documentation" folder contains some project and analysis documentation, e.g., the pdf containing all metrics used, the final presentation as pdf and pptx, etc.
 
@@ -82,10 +82,10 @@ This script performs an linear regression analysis of the indicated dataset. The
 The scripts perform a decision tree analysis of the indicated dataset. The paths to the combinedData.csv and targets.csv must be set to the paths on your local drive. The python scripts use the library scikit learn and are called without providing any parameters. They build the model, calculate metrics and export a dot file called classification_tree.dot  or regression_tree.dot containing the decision tree using graphviz. The .dot file can be transformed to a png using 'dot -Tpng tree.dot -o tree.png' in the command line afterwards.
 
 ### DecisionTreeClassification_coarseGrained.py
-Computes the F1-score, the accuracy and plots a Confusion matrix (using the script plot_confusion_matrix.py). Uses coarse-grained class labels: useful (1-11) useless (>11)
+Computes the F1-score, the accuracy and plots a confusion matrix (using the script plot_confusion_matrix.py). Uses coarse-grained class labels: useful (1-11) useless (>11)
 
 ### DecisionTreeClassification_fineGrained.py
-Computes the F1 'mean' score and plots a Confusion matrix. Uses fine-grained class labels: perfect (1) good (2-4) medium (5-11) useless (>11)
+Computes the F1 'mean' score and plots a confusion matrix. Uses fine-grained class labels: perfect (1) good (2-4) medium (5-11) useless (>11)
 
 ### DecisionTreeRegression.py
 Computes the r2-score, the model performs rather bad (due to the highly scattered target values).
